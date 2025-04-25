@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Success</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-color: #1a1a1a;
+            --text-color: #e0e0e0;
+            --accent-color: #7637db;
+            --accent-hover: #9d50bb;
+            --input-bg: #2a2a2a;
+            --border-color: #333;
+            --glow: 0 0 15px rgba(110, 72, 170, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .success-container {
+            background-color: var(--card-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: var(--glow);
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .success-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(118, 55, 219, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            z-index: -1;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: rotate(45deg) translate(-30%, -30%);
+            }
+            100% {
+                transform: rotate(45deg) translate(30%, 30%);
+            }
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .checkmark-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            box-shadow: var(--glow);
+            animation: circle-anim 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark-check {
+            position: absolute;
+            top: 25%;
+            left: 38%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 18px;
+            height: 40px;
+            border-right: 4px solid var(--accent-color);
+            border-bottom: 4px solid var(--accent-color);
+            transform-origin: bottom left;
+            animation: check-anim 0.4s 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        @keyframes circle-anim {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes check-anim {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(45deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(45deg);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: var(--accent-color);
+            opacity: 0;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(157, 80, 187, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <div class="checkmark">
+            <div class="checkmark-circle"></div>
+            <div class="checkmark-check"></div>
+        </div>
+        <h1> Successfully! Sign Up in ClassNexus ERP</h1>
+        <p>Welcome In Our Institue. Your account has been successfully created.</p>
+        <p>Now Please Login Your account ......</p>
+        <a href="/login" class="btn">Log in</a>
+    </div>
+
+    <script>
+        // Create confetti effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.success-container');
+            const colors = ['#7637db', '#9d50bb', '#e0e0e0', '#7637db', '#9d50bb'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = -10 + 'px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 8 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                container.appendChild(confetti);
+                
+                animateConfetti(confetti);
+            }
+            
+            function animateConfetti(el) {
+                const startX = parseFloat(el.style.left);
+                const startY = -10;
+                const endY = 100 + Math.random() * 20;
+                const rotation = Math.random() * 360;
+                const duration = 2 + Math.random() * 3;
+                
+                el.style.opacity = '1';
+                el.style.transform = `rotate(${rotation}deg)`;
+                
+                const animation = el.animate([
+                    { top: startY + 'px', left: startX + '%', opacity: 0 },
+                    { top: startY + 20 + 'px', opacity: 1 },
+                    { top: endY + '%', left: (startX + (Math.random() - 0.5) * 20) + '%', opacity: 0 }
+                ], {
+                    duration: duration * 1000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)',
+                    delay: Math.random() * 2000
+                });
+                
+                animation.onfinish = () => {
+                    el.style.top = -10 + 'px';
+                    el.style.left = startX + '%';
+                    animateConfetti(el);
+                };
+            }
+        });
+    </script>
+</body>
+</html>

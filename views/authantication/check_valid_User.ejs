@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Login</title>
+    <link rel="stylesheet" href="/logins.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login Up</h2>
+        <form action="/Check_user" method="post" >
+            <div class="input-group">
+                <label for="user_id">Enter E-mail or ID</label>
+                <input type="number" id="user_id" name="user_id" placeholder="Enter your E-mail or ID" required>
+            </div>           
+            <button type="submit">Go to Sing-Up</button>
+            <div class="signup-link">
+                Don't have account? <a href="/sing-up">Sing Up</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

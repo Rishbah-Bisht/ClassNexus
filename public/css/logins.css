@@ -1,0 +1,359 @@
+:root {
+    --bg-color: #0f0f0f;
+    --card-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --accent-color: #7637db;
+    --accent-hover: #9d50bb;
+    --input-bg: #2a2a2a;
+    --border-color: #333;
+    --glow: 0 0 15px rgba(110, 72, 170, 0.7);
+}
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(110, 72, 170, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(157, 80, 187, 0.1) 0%, transparent 50%);
+  }
+
+
+.login-container {
+    margin: auto;
+    background-color: var(--card-color);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 350px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+    border-radius: 14px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.login-container:hover::before {
+    opacity: 1;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+    margin: 10px auto 0;
+    border-radius: 3px;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+input[type="email"],
+input[type="number"],
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 14px 15px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: var(--text-color);
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: var(--glow);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+button:hover {
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.forgot-password a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+.forgot-password a:hover {
+    color: var(--accent-color);
+}
+
+.forgot-password a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-color);
+    bottom: -2px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s;
+}
+
+.forgot-password a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #888;
+}
+
+.signup-link a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+
+
+
+:root {
+    --bg-color: #0f0f0f;
+    --card-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --accent-color: #7637db;
+    --accent-hover: #9d50bb;
+    --input-bg: #2a2a2a;
+    --border-color: #333;
+    --glow: 0 0 15px rgba(110, 72, 170, 0.7);
+}
+
+.main-content {
+    background-color: var(--card-color);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid var(--border-color);
+    position: relative;
+    overflow: hidden;
+    margin: 20px;
+}
+
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    background: linear-gradient(45deg, var(--accent-color), var(--accent-hover));
+    border-radius: 14px;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+}
+
+.main-content:hover::before {
+    opacity: 0.5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-color);
+}
+
+.info h2 {
+    color: var(--text-color);
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
+#file-input {
+    display: none;
+}
+
+.upload-label {
+    padding: 8px 20px;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+.upload-label:hover {
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-color);
+    font-size: 15px;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: var(--glow);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.note {
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    padding: 14px;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    background: var(--input-bg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+    }
+}

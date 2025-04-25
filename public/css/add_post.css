@@ -1,0 +1,157 @@
+.main-content {
+    max-width: 800px;
+    width: 100%;
+    margin: 50px auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Heading: Posts */
+.main-content > h1 {
+    color: var(--accent-color);
+    font-size: 32px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Upload Container */
+.upload-container {
+    background-color: var(--card-color);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+}
+
+/* Upload Heading */
+.upload-container h1 {
+    color: var(--text-color);
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    background-color: var(--input-bg);
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover {
+    border-color: var(--accent-color);
+    background-color: #2f2f2f;
+    box-shadow: var(--glow);
+}
+
+.upload-area i {
+    font-size: 48px;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+}
+
+.upload-area p {
+    margin: 10px 0;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+/* File Input Hide */
+#file-input {
+    display: none;
+}
+
+.browse-btn {
+    margin-top: 10px;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.browse-btn:hover {
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+}
+
+/* Image Preview */
+.preview-container {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#image-preview {
+    max-width: 100%;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Description Textarea */
+.description-area {
+    margin-top: 25px;
+}
+
+.description-area label {
+    color: var(--text-color);
+    font-size: 15px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.description-area textarea {
+    width: 95%;
+    padding: 14px;
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    resize: vertical;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.description-area textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: var(--glow);
+}
+
+/* Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, var(--accent-color), var(--accent-hover));
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: all 0.3s;
+}
+
+.submit-btn:hover {
+    box-shadow: var(--glow);
+    transform: translateY(-2px);
+}
+
+/* File Info Text */
+.file-info {
+    margin-top: 10px;
+    color: var(--text-color);
+    font-size: 13px;
+    opacity: 0;
+}

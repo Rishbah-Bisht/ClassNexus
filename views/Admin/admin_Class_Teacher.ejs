@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/subjects.css">
+    <style>
+  
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+
+        }
+
+        table th,
+        table td {
+            width: 200px;
+            padding: 10px;
+            text-align: left;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <%- include('../partials/Admin_sidebar', { currentPage: 'Subject' }) %>
+        <div class="main-content">
+            <h1>
+                <%=className%> Class Teacher
+            </h1>
+            <div class="container">
+                <!-- Image Section -->
+                <img src="/<%= teachr_img && teachr_img.profile_img ? teachr_img.profile_img : 'uploads/f5bde02fe998868680167f0f.png' %>" alt="Teacher Image" />
+
+
+                <!-- Table Section -->
+                <table>
+                  
+                    <tbody>
+                        <tr>
+                            <td>Name :</td>
+                            <td><%=teacher.name%></td>
+                        </tr>
+                        <tr>
+                            <td>Teacher ID :</td>
+                            <td><%=teacher.Registration_Id%></td>
+                        </tr>
+                        <tr>
+                            <td>Father Name :</td>
+                            <td><%=teacher.fatherName%></td>
+                        </tr>
+                        <tr>
+                            <td>Role :</td>
+                            <td><%=teacher.role%></td>
+                        </tr>
+                        <tr>
+                            <td>D.O.B :</td>
+                            <td><%=teacher.dob%></td>
+                        </tr>
+                        <tr>
+                            <td>Deapartment :</td>
+                            <td><%=teacher.department%></td>
+                        </tr>
+                        <tr>
+                            <td>Subject :</td>
+                            <td><%=teacher.subject%></td>
+                        </tr>
+                        <tr>
+                            <td>Class Teacher :</td>
+                            <td><%=teacher.ClassTeacher%></td>
+                        </tr>
+                        <tr>
+                            <td>Qualification :</td>
+                            <td><%=teacher.qualification%></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td><%=teacher.address%></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+         
+            <div class="post-btn">
+                <a href="/Admin/Class/ClassTeacher/Change-Teacher/<%=className%>">Change</a>
+            </div>
+
+        </div>
+</body>
+
+</html>

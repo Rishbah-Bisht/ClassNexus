@@ -1,0 +1,13 @@
+<div class="sidebar">
+    <div class="logo">ClassNexus</div>
+    <nav>
+        <a href="/Admin/Dashboard" class="<%= currentPage === 'dashboard' ? 'active' : '' %>">Dashboard</a>
+        <a href="/Admin/Add-Student" class="<%= currentPage === 'add-student' ? 'active' : '' %>"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add Student</a>
+        <a href="/Admin/Add-teacher" class="<%= currentPage === 'add-teacher' ? 'active' : '' %>"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Add Teacher</a>
+        <a href="/Admin/Classes" class="<%= currentPage === 'Subject' ? 'active' : '' %>"><i class="fa-solid fa-school"></i>&nbsp;&nbsp;Class's</a>
+        <a href="/Admin/Profile" class="<%= currentPage === 'profile' ? 'active' : '' %>">
+          <i class="fa-solid fa-user"></i>&nbsp;&nbsp;Profile
+        </a>        
+        <a href="/Logout"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp;Logout</a>
+    </nav>
+  </div>

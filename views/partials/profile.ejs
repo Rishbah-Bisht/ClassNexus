@@ -1,0 +1,54 @@
+<div class="main-content">
+
+
+    <div class="profile-header">
+      <img id="profile-picture" src="<%= Owner_Info2?.profile_img ? '/' + Owner_Info2.profile_img : '/uploads/Profile.png' %>" alt="Profile Picture" class="profile-picture">
+
+
+      <div class="profile-info">
+        <div class="userIdName">
+          <h3>
+            <%= Owner_Info2.username %>
+          </h3>
+        </div>
+        <div class="profile-actions">
+
+          <a href="/profile/profileEdit" class="prof"><i class="fa-solid fa-pen-fancy"></i> Edit Profile</a>
+        </div>
+        <div class="profile-stats">
+          <div>
+            <p>0</p>
+            <p>posts</p>
+          </div>
+          <div>
+            <p><%- Owner_Info2.follower %></p>
+            <p>followers</p>
+          </div>
+          <div>
+            <p><%- Owner_Info2.following %></p>
+            <p>following</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="about-user">
+      <h3 class="bio_data">
+        <%= OwnerInfo.name %>
+      </h3>
+      <p class="bio_data"><%- Owner_Info2.bio %></p>
+
+      
+    </div>
+
+    <div class="profile-container">
+
+      <div class="profile-nav">
+        <button id="posts-btn" class="nav-btn active">Posts</button>
+        <button id="tweets-btn" class="nav-btn">Tweets</button>
+      </div>
+
+
+    </div>
+
+  </div>

@@ -1,0 +1,57 @@
+<div class="main-content">
+    <form method="POST" action="/Update-user-info" enctype="multipart/form-data">
+      <div class="container">
+
+          <div class="header">
+            <img id="profile-picture" src="/<%= Owner_2.profile_img %>" alt="Profile Picture"
+              class="profile-picture">
+            <div class="info">
+              <h2><%= Owner_2.username %></h2>
+
+            </div>
+            <input type="file" id="file-input" name="p_img" accept="image/*" value="">
+            <label for="file-input" class="upload-label">Upload</label>
+          </div>
+          <div class="form-group">
+
+
+            <label for="user-name">
+              Nick Name
+            </label>
+            <input id="user-name" placeholder="Website" name="name" type="text" autocomplete="off" readonly
+              value="<%= OwnerInfo.name %>" />
+
+
+
+
+            <label for="website">
+              Website
+            </label>
+            <input id="website" placeholder="Website" name="web_name" type="text" autocomplete="off"
+              value="" />
+            <p class="note">
+              Editing your links is only available on mobile. Visit the Instagram app and edit your profile to change
+              the
+              websites in your bio.
+            </p>
+          </div>
+          <div class="form-group">
+            <label for="bio">
+              Bio
+            </label>
+            <textarea id="bio" name="bio" placeholder="Bio" autocomplete="off" ><%= Owner_2.bio %></textarea>
+            <p class="note">
+              0 / 150
+            </p>
+       
+          </div>
+
+
+          <button class="submit-btn" disabled="">
+            Submit
+          </button>
+
+
+      </div>
+    </form>
+    </div>

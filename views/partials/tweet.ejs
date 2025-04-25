@@ -1,0 +1,33 @@
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Tweet's</h1>
+
+    <!-- Create Post Section -->
+    <form class="create-post" action="/save-tweet" method="POST">
+      <input placeholder="What's on your mind?" name="tweets">
+      <button >Post</button>
+    </form>
+    <% for (let tweet of Alltweets) { %>
+      <div class="post">
+        <div class="post-header">
+          <img src="/<%= OwnerInfo.profile_img %>" alt="User">
+          <div>
+            <h3><%= OwnerInfo.username %></h3>
+            
+          </div>
+          &#46;
+          <p class="timeAgo"><%= timeAgo(new Date(tweet.createdAt)) %></p>
+        </div>
+          <div class="post-content">
+              <%= tweet.newtweet %>
+          </div>
+          <div class="post-actions">
+              <button><i class="fa-solid fa-heart likeBtn"></i> <p><%= tweet.p_like %></p></button>
+              <button><i class="fa-solid fa-comments noComnt"></i></button>
+          </div>
+      </div>
+  <% } %>
+  
+    
+  </div>

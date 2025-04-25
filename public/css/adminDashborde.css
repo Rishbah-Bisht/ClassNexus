@@ -1,0 +1,354 @@
+:root {
+    --bg-color: #0f0f0f;
+    --card-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --accent-color: #7637db;
+    --accent-hover: #9d50bb;
+    --input-bg: #2a2a2a;
+    --border-color: #333;
+    --glow: 0 0 15px rgba(110, 72, 170, 0.7);
+  }
+  
+  body {
+    overflow-x: hidden;
+  }
+  
+  .panel {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid var(--border-color);
+    background-color: #141414;
+    overflow-y: hidden;
+  }
+  
+  .panel:last-child {
+    border-right: none;
+  }
+  
+  .main-content{
+      max-width: 100%;
+      
+      display: flex;
+  }
+  .list-item {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: var(--input-bg);
+    transition: all 0.3s ease;
+  }
+  
+  .list-item:hover {
+    background-color: rgba(255, 255, 255, 0.448);
+    color: #fff;
+  }
+  
+  .details {
+    margin-top: 10px;
+    background: var(--input-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+  
+  button {
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  
+  button:hover {
+    color: var(--accent-hover);
+  }
+  #student-panel {
+    padding: 20px;
+}
+
+.student-container,.teacher-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 12px;
+    margin-bottom: 10px;
+ border: 1px solid grey;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.student-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.username {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+}
+
+.student-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.student-name {
+    font-size: 16px;
+    color: #cacaca;
+}
+
+.student-id {
+    font-size: 14px;
+    color: #cacaca;
+}
+
+.time-ago {
+    font-size: 15px;
+    color: #cacaca;
+    align-self: flex-start;
+    margin-left: 10px;
+    text-align: right;
+}
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    color: white;
+    background-color: #62626200;
+    box-sizing: border-box;
+}
+.search-bar::placeholder{
+    color: white;
+}
+
+
+.teacher-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.username {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.teacher-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+
+
+
+#student-panel h2,#teacher-panel h2 {
+  margin-bottom: 15px;
+  font-size: 24px;
+  text-align: center;
+  color: var(--accent-color);
+}
+
+/* Search Bar */
+#search-bar {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  color: var(--text-color);
+  transition: 0.3s;
+}
+
+#search-bar:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  box-shadow: var(--glow);
+}
+
+/* Student Container */
+.student-container,.teacher-container  {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.teacher-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px var(--accent-hover);
+}
+.student-container:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 10px var(--accent-hover);
+}
+
+/* Student Info */
+.student-details,.teacher-details  {
+  display: flex;
+  flex-direction: column;
+}
+
+.student-name,.teacher-name  {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.student-id,.teacher-id {
+  font-size: 14px;
+  color: #aaa;
+}
+
+/* Class Info */
+.time-ago {
+  font-size: 14px;
+  color: #bbb;
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1200px) {
+  .left-sidebar {
+      width: 200px;
+  }
+
+  .right-sidebar {
+      width: 250px;
+  }
+
+  .card {
+      padding: 10px;
+  }
+
+  .cards-container {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+
+@media screen and (max-width: 992px) {
+  body {
+      flex-direction: column;
+  }
+
+  .left-sidebar,
+  .right-sidebar {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid var(--border-color);
+      flex-direction: row;
+      overflow-x: auto;
+      justify-content: space-around;
+      align-items: center;
+  }
+
+  .main-content {
+      padding: 15px;
+  }
+
+  .greeting {
+      font-size: 24px;
+  }
+
+  .section-title {
+      font-size: 20px;
+  }
+
+  .now-playing-img {
+      aspect-ratio: auto;
+      height: 180px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .cards-container {
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  }
+
+  .card-title {
+      font-size: 14px;
+  }
+
+  .card-desc {
+      font-size: 12px;
+  }
+
+  .control-btn {
+      font-size: 16px;
+  }
+
+  .play-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+  }
+
+  .queue-item-img {
+      width: 30px;
+      height: 30px;
+  }
+
+  .queue-item-title {
+      font-size: 12px;
+  }
+
+  .queue-item-artist {
+      font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .left-sidebar,
+  .right-sidebar {
+      flex-direction: column;
+      padding: 10px;
+  }
+
+  .search-bar {
+      flex-direction: column;
+      gap: 8px;
+  }
+
+  .search-bar input {
+      width: 100%;
+  }
+
+  .controls {
+      gap: 15px;
+  }
+
+  .main-content {
+      padding: 10px;
+  }
+
+  .cards-container {
+      gap: 10px;
+  }
+}

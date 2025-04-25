@@ -1,0 +1,136 @@
+:root {
+    --bg-color: #0f0f0f;
+    --card-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --accent-color: #7637db;
+    --accent-hover: #9d50bb;
+    --input-bg: #2a2a2a;
+    --border-color: #333;
+    --glow: 0 0 15px rgba(110, 72, 170, 0.7);
+}
+
+
+
+
+.message-card {
+    background: var(--card-color);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: var(--glow);
+    border: 1px solid var(--border-color);
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.message-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(118, 55, 219, 0.1) 50%,
+        transparent 100%
+    );
+    animation: shine 5s infinite;
+    transform: rotate(30deg);
+}
+
+.message-card:hover {
+    transform: rotateY(5deg) translateY(-5px);
+    box-shadow: 0 10px 25px rgba(110, 72, 170, 0.5);
+}
+
+.message-box {
+    position: relative;
+    z-index: 2;
+}
+
+.message-box p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+    background: linear-gradient(90deg, #e0e0e0, #b0b0b0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
+}
+
+.action-btn {
+    width: 100%;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(118, 55, 219, 0.5);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.action-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(157, 80, 187, 0.6);
+}
+
+.action-btn:hover::before {
+    left: 100%;
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+    20% {
+        left: 100%;
+    }
+    40% {
+        left: 100%;
+    }
+    60% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

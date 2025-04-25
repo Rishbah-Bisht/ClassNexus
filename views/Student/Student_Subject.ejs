@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/subjects.css">
+</head>
+
+<body>
+
+    <%- include('../partials/Student_sidebar', { currentPage: 'Subject' }) %>
+    <div class="main-content">
+        <h1>Class - <%=className%> </h1>
+       
+        <div class="table-container">
+            <h2>Subject List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject Name</th>
+                        <th>Subject Code</th>
+                        <th>Subject Teacher</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (classDoc && classDoc.subjects.length > 0) { %>
+                        <% classDoc.subjects.forEach(subject => { %>
+                            <tr>
+                                <td><%= subject.name %></td>
+                                <td><%= subject.code %></td>
+                                <td><%= subject.teacher %></td>
+                                
+                            </tr>
+                        <% }) %>
+                    <% } 
+                     else { %>
+                        <tr>
+                            <td colspan="3">No subjects found for this class</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            
+        </div>
+
+
+      </div>
+</body>
+
+</html>

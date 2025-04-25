@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Social Media</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/admin.css">
+</head>
+
+<body>
+    <%- include('../partials/Admin_sidebar', { currentPage: 'add-teacher' }) %>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div id="teacher-tab" class="tab-content">
+                <h2>Add New Teacher</h2>
+                <form id="teacher-form" action="/Admin/Save-User-info" method="post" autocomplete="off">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user-Teacher_ID">Teacher ID</label>
+                            <input type="number" id="user-Teacher_ID" name="Teacher_ID" required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher-name">Full Name</label>
+                            <input type="text" id="teacher-name" name="name" required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher-father-name">Father's Name</label>
+                            <input type="text" id="teacher-father-name" name="father_name" required autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacher-dob">Date of Birth</label>
+                            <input type="text" id="teacher-dob" name="dob" required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher-email">Email</label>
+                            <input type="email" id="teacher-email" name="email" required autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacher-department">Department</label>
+                            <select id="teacher-department" name="department" required>
+                                <option value="" disabled selected>Select a Department</option>
+                                <option value="science">Science</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="english">English</option>
+                                <option value="social_science">Social Science</option>
+                                <option value="computer_science">Computer Science</option>
+                                <option value="arts">Arts</option>
+                                <option value="commerce">Commerce</option>
+                                <option value="medical">Medical</option>
+                                <option value="languages">Languages Department</option>
+                                <option value="physical_education">Physical Education Department</option>
+                                <option value="music">Music Department</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="teacher-subject">Subject</label>
+                            <input type="text" id="teacher-subject" name="subject" required autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="teacher-qualification">Qualification</label>
+                            <input type="text" id="teacher-qualification" name="qualification" required
+                                autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="teacher-experience">Experience (years)</label>
+                            <input type="number" id="teacher-experience" name="experience" min="0" required
+                                autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-class">Class Teacher</label>
+                            <select id="user-class" name="class" required autocomplete="off">
+                                <option value="" disabled selected>Select Class</option>
+                                <option value="">-</option>
+                                <option value="V">V</option>
+                                <option value="VI">VI</option>
+                                <option value="VII">VII</option>
+                                <option value="VIII">VIII</option>
+                                <option value="IX">IX</option>
+                                <option value="X">X</option>
+                                <option value="XI(M)">XI (Math)</option>
+                                <option value="XI(B)">XI (Biology)</option>
+                                <option value="XI(C)">XI (Commerce)</option>
+                                <option value="XI(A)">XI (Arts)</option>
+                                <option value="XII(M)">XII (Math)</option>
+                                <option value="XII(B)">XII (Biology)</option>
+                                <option value="XII(C)">XII (Commerce)</option>
+                                <option value="XII(A)">XII (Arts)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="teacher-address">Address</label>
+                        <textarea id="teacher-address" name="address" autocomplete="off"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-role">Role</label>
+                        <select id="user-role" name="role" required autocomplete="off">
+                            <option value="teacher" selected>teacher</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="teacher-about">About</label>
+                        <textarea id="teacher-about" name="about" autocomplete="off"></textarea>
+                    </div>
+
+
+                    <button type="submit" class="submit-btn">Add Teacher</button>
+                    <div id="teacher-success" class="success-message">
+                        Teacher added successfully!
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+
+
+        <!-- JavaScript -->
+        <script src="post.js">
+
+        </script>
+</body>
+
+</html>

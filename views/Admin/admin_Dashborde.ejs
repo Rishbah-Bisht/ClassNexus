@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Social Media</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/adminDashborde.css">
+
+</head>
+
+<body>
+    <%- include('../partials/Admin_sidebar', { currentPage: 'dashboard' }) %>
+
+
+
+    <div class="main-content">
+        <div class="panel" id="student-panel">
+            
+            <h2>Students</h2>
+            <input type="text" id="search-bar" class="search-bar" placeholder="Search for students..." onkeyup="filterStudents()">
+            <% for(let student of students){ %>
+                <div class="student-container">
+                    <div class="student-info">
+                        <div class="student-details">
+                            <span class="student-name"><%= student.name %></span>
+                            <span class="student-id">Student ID - <%= student.Registration_Id %></span>
+                        </div>
+                    </div>
+                    <div class="time-ago">
+                        Class - <%= student.class %> 
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        
+        
+
+        <div class="panel" id="teacher-panel">
+            <h2>Teachers</h2>
+            <input type="text" id="search-bar" class="search-bar" placeholder="Search for Teachers..." onkeyup="filterStudents()">
+            <div id="teacher-list">
+                <% for(let teachr of teachrs){ %>
+                    <div class="teacher-container">
+                        <div class="teacher-info">
+                            <div class="teacher-details">
+                                <span class="teacher-name"><%= teachr.name %></span>
+                                <span class="teacher-id">Teacher ID - <%= teachr.Registration_Id %></span>
+                            </div>
+                        </div>
+                        <div class="time-ago">
+                            Deapartment - <%= teachr.department %> 
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+    </script>
+
+
+</body>
+
+</html>

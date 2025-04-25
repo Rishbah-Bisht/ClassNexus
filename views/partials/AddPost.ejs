@@ -1,0 +1,27 @@
+<div class="main-content">
+    <h1>Posts</h1>
+    <div class="upload-container">
+        <h1>Upload Your Image</h1>
+        
+        <form id="upload-form" action="/save-Post" method="POST" enctype="multipart/form-data">
+            <div class="upload-area" id="upload-area">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & drop your image here or click to browse</p>
+                <input type="file" id="file-input" name="image" accept="image/*">
+                <button type="button" class="browse-btn">Select Image</button>
+            </div>
+            
+            <div class="preview-container" id="preview-container">
+                <img id="image-preview" src="#" alt="Preview">
+                <div class="file-info" id="file-info"></div>
+            </div>
+            
+            <div class="description-area">
+                <label for="description">Image Description:</label>
+                <textarea id="description" name="description" placeholder="Enter a description for your image..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Post</button>
+        </form>
+    </div>
+  </div>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/Admin_subjects.css">
+</head>
+<body>
+    <%- include('../partials/Admin_sidebar', { currentPage: 'Subject' }) %>
+    <div class="main-content">
+        <h2>All Classes</h2>
+        <div class="class-container">
+          <a href="#" class="class-box" data-class="V">V</a>
+          <a href="#" class="class-box" data-class="VI">VI</a>
+          <a href="#" class="class-box" data-class="VII">VII</a>
+          <a href="#" class="class-box" data-class="VIII">VIII</a>
+          <a href="#" class="class-box" data-class="IX">IX</a>
+          <a href="#" class="class-box" data-class="X">X</a>
+          <a href="#" class="class-box" data-class="XI(M)">XI (Math)</a>
+          <a href="#" class="class-box" data-class="XI(B)">XI (Biology)</a>
+          <a href="#" class="class-box" data-class="XI(C)">XI (Commerce)</a>
+          <a href="#" class="class-box" data-class="XI(A)">XI (Arts)</a>
+          <a href="#" class="class-box" data-class="XII(M)">XII (Math)</a>
+          <a href="#" class="class-box" data-class="XII(B)">XII (Biology)</a>
+          <a href="#" class="class-box" data-class="XII(C)">XII (Commerce)</a>
+          <a href="#" class="class-box" data-class="XII(A)">XII (Arts)</a>                  
+          </div>
+          
+        </div>
+      </div>
+      <script>
+        document.querySelectorAll('.class-box').forEach(box => {
+          box.addEventListener('click', function (e) {
+            e.preventDefault();
+            const className = encodeURIComponent(this.dataset.class.trim());
+            window.location.href = `/Admin/Class/${className}`;
+          });
+        });
+      </script>
+</body>
+</html>

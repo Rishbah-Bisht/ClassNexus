@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class Schedule</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #schedule {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      display: none;
+    }
+    #error-message {
+      color: red;
+      display: none;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the Class Schedule</h1>
+  <p>Click below to fetch your class schedule.</p>
+  
+  <button onclick="getSchedule()">Get Schedule</button>
+
+  <div id="schedule">
+    <h2>Class Schedule</h2>
+    <ul>
+      <li id="monday"></li>
+      <li id="tuesday"></li>
+      <li id="wednesday"></li>
+      <li id="thursday"></li>
+      <li id="friday"></li>
+    </ul>
+  </div>
+
+  <div id="error-message">
+    Sorry, I couldn’t fetch the schedule. Please try again later.
+  </div>
+
+  <script>
+    function getSchedule() {
+      // Clear previous schedule and error message
+      document.getElementById('schedule').style.display = 'none';
+      document.getElementById('error-message').style.display = 'none';
+
+      // Send GET request to your API
+      fetch('/get-schedule')
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            // Display the schedule
+            document.getElementById('monday').textContent = `Monday: ${data.monday}`;
+            document.getElementById('tuesday').textContent = `Tuesday: ${data.tuesday}`;
+            document.getElementById('wednesday').textContent = `Wednesday: ${data.wednesday}`;
+            document.getElementById('thursday').textContent = `Thursday: ${data.thursday}`;
+            document.getElementById('friday').textContent = `Friday: ${data.friday}`;
+
+            // Show the schedule div
+            document.getElementById('schedule').style.display = 'block';
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching schedule:', error);
+          document.getElementById('error-message').style.display = 'block';
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<div class="main-content">
+    <h1>Class - <%= className %></h1>
+    <div class="table-container">
+        <h2>All Students In Class <%= className %></h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Roll Number</th>
+                    <th>Student Name</th>
+                    <th>Father Name</th>
+                    <th>Subject ID</th>
+                    <th>Attendance</th>
+                    <th>Email </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (AllStudent && AllStudent.length > 0) { %>
+                    <% AllStudent.forEach((student, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td> <!-- Roll Number -->
+                            <td><%= student.name %></td>
+                            <td><%= student.fatherName %></td>
+                            <td><%= student.Registration_Id %></td>
+                            <td>--</td> <!-- You can add attendance logic here -->
+                            <td><%= student.email %></td> 
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="5">No students found for this class</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
