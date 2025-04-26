@@ -20,6 +20,18 @@
     <%- include('../partials/Teacher_sidebar', { currentPage: 'Class' }) %>
 
         <div class="main-content">
+            <% if (success_msg) { %>
+                <div class="alert alert-success">
+                  <%= success_msg %>
+                </div>
+              <% } %>
+              
+              <% if (error_msg) { %>
+                <div class="alert alert-danger">
+                  <%= error_msg %>
+                </div>
+              <% } %>
+              
             <form method="POST" action="/mark-attendance">
             <h1><input type="text" name="className" value="<%=className%>" readonly></h1>
             <div class="table-container">

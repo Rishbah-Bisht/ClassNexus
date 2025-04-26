@@ -68,6 +68,22 @@ router.post("/Admin/Save-User-info", async (req, res) => {
   }
 });
 
+
+router.get('/Admin/User/:Registration_Id', ensureAuth, async (req, res) => {
+  const user = await User.findOne({ Registration_Id: req.params.Registration_Id });
+
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
+  
+  const user_info = await UserMoreInfo.findOne({ User_id: user._id });
+  
+  res.render('admin_User_Profile.ejs', { user,user_info });
+  
+  
+});
+
+
 // Admin Dashboard
 router.get("/Admin/Dashboard", ensureAuth, async (req, res) => {
   try {
@@ -157,14 +173,22 @@ router.get('/Admin/Class/ClassTeacher/:className', ensureAuth, async (req, res) 
   const className = req.params.className;
   try {
     const teacher = await User.findOne({ ClassTeacher: className });
-    const teacherId = new ObjectId(teacher._id);
-    const teachr_img = await UserMoreInfo.findOne({ User_id: teacherId });
-    res.render('admin_Class_Teacher.ejs', { teacher, className, teachr_img });
+
+    if (teacher) {
+      const teacherId = new ObjectId(teacher._id);
+      const teachr_img = await UserMoreInfo.findOne({ User_id: teacherId });
+
+      res.render('admin_Class_Teacher.ejs', { teacher, className, teachr_img });
+    } else {
+      res.render('admin_ask_Class_Teacher.ejs', { className });
+    }
+    
   } catch (err) {
     console.error(err);
     res.status(500).send('Error fetching class data');
   }
 });
+
 
 // Change Class Teacher Page
 router.get('/Admin/Class/ClassTeacher/Change-Teacher/:className', ensureAuth, (req, res) => {

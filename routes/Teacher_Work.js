@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const app = express();
 const router = express.Router();
 const fs = require("fs");
 const Class = require('../models/classe');
@@ -12,6 +13,19 @@ const { route } = require('./auth');
 const ensureAuth = require("../middleware/auth");
 const Attendance = require("../models/Attandance"); 
 const checkClassTime = require('../middleware/checkClassTime');
+const flash = require('connect-flash');
+
+
+// Fir flash use karo
+app.use(flash());
+
+// Fir locals me flash messages set karo
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
+
 
 
 async function loadTeacherData(req, res, next) {
@@ -39,7 +53,7 @@ router.get('/Teacher/Profile', ensureAuth, loadTeacherData, async (req, res) => 
     });
 });
 
-router.get('/Teacher/My-Class', ensureAuth, loadTeacherData, async (req, res) => {
+router.get('/Teacher/My-Class', ensureAuth,checkClassTime, loadTeacherData, async (req, res) => {
     res.render('Teacher_MyClass.ejs', {
         classInfo: req.teacherBasic.ClassTeacher
     });
@@ -74,7 +88,9 @@ router.post("/mark-attendance",checkClassTime, async (req, res) => {
 
     try {
         await newAttendance.save();
-        res.send("Attendance marked successfully!");
+        req.flash('success_msg', 'Attendace Marked successfully!');
+        res.redirect(`/Teacher/My-Class/Attandace`);
+        
     } catch (err) {
         console.error("Error saving attendance", err);
         res.status(500).send("Error marking attendance");

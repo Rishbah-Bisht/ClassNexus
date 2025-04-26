@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const flash = require('connect-flash');
 // Route Files
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post');
@@ -54,6 +55,15 @@ app.set("views", [
     path.join(__dirname, "views/authantication"),
     path.join(__dirname, "views/Teacher")
 ]);
+
+app.use(flash());
+
+// 3. flash ko res.locals me daalna (for ejs use)
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  next();
+});
 
 // Routes
 app.use('/', authRoutes);

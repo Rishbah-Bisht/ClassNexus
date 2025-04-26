@@ -7,8 +7,9 @@ async function checkClassTime(req, res, next) {
 
     const classStartHour = 7;  // Class starts at 9 AM
     const classEndHour = 24;   // Class ends at 7 PM
+    const className = req.query.className || req.body.className;
 
-    const { className } = req.body || req.query; // Get class name from query or body
+
 
     // Check if the current time is within the class hours (9 AM to 7 PM)
     if (currentHour >= classStartHour && currentHour < classEndHour) {
