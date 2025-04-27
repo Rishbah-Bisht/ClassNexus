@@ -55,7 +55,7 @@
                                         <%= index + 1 %>
                                     </td> <!-- Roll Number -->
                                     <td>
-                                        <%= student.name %>
+                                        <input type='text' name='StudentName[<%= student._id %>]' value='<%= student.name %>' readonly>
                                     </td>
                                     <td>
                                         <%= student.fatherName %>

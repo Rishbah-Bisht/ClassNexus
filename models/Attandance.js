@@ -17,10 +17,11 @@ const attendanceSchema = new mongoose.Schema({
   },
   students: [
     {
-      student: {
+      student_Id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
+      student_Name: [String],
       status: {
         type: String,
         enum: ['Present', 'Absent'],

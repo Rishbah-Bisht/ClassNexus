@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/profile.css">
+    <link rel="stylesheet" href="/subjects.css">
+    <link rel="stylesheet" href="/Attandance.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <%- include('../partials/Teacher_sidebar', { currentPage: 'Class' }) %>
+        <div class="main-content">
+            <h2>Class - <%=className %>
+            </h2>
+            <% if (success_msg) { %>
+                <div class="alert alert-success">
+                    <%= success_msg %>
+                </div>
+                <% } %>
+
+                    <% if (error_msg) { %>
+                        <div class="alert alert-danger">
+                            <%= error_msg %>
+                        </div>
+                        <% } %>
+                            <!-- <div class="box">
+
+                                <div class="left-side">
+                                    <table id="nameTable">
+                                        <tr>
+                                            <th>Name</th>
+                                        </tr>
+                                        <tr>
+
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+                                <div class="right-side">
+                                    <table id="attendanceTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="attendanceBody">
+                                            <!-- Attendance status rows will be dynamically added here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div> -->
+        </div>
+        <script>
+// Sample Data
+const attendanceData = {
+    _id: '680dbc8bd53d79d3f5362733',
+    date: new Date('2025-04-27T05:11:39.903Z'),
+    class: 'V',
+    teacher: '680afd051d71360fc5dbf0ac',
+    students: [
+        { student_Name: ['Mohan Singh'], status: 'Absent', _id: '680dbc8bd53d79d3f5362734' },
+        { student_Name: ['Neha Verma'], status: 'Absent', _id: '680dbc8bd53d79d3f5362735' }
+    ]
+};
+
+// Function to display student names and attendance status
+function displayAttendance(data) {
+    const nameTableBody = document.getElementById('studentNames');
+    const attendanceTableBody = document.getElementById('attendanceData');
+
+    // Clear the previous content in the tables
+    nameTableBody.innerHTML = '';
+    attendanceTableBody.innerHTML = '';
+
+    // Loop through students and display their names and statuses
+    data.students.forEach(student => {
+        // Create a new row for student name
+        const nameRow = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        nameCell.textContent = student.student_Name.join(', '); // Displaying the names (comma separated if there are multiple)
+        nameRow.appendChild(nameCell);
+        nameTableBody.appendChild(nameRow);
+
+        // Create a new row for student status
+        const statusRow = document.createElement('tr');
+        const statusCell = document.createElement('td');
+        statusCell.textContent = student.status;
+        statusRow.appendChild(statusCell);
+        attendanceTableBody.appendChild(statusRow);
+    });
+}
+
+// Call the function to display the data
+displayAttendance(attendanceData);
+
+
+            // fetch('http://localhost:3000/api/students/Attendace')
+            //     .then(response => response.json())
+            //     .then(data => {
+
+            //         const rightDiv = document.querySelector(".right-side");
+
+
+            //         data.forEach(student => {
+            //             const tableBody2 = document.createElement("tbody");
+            //             const row = document.createElement("tr");
+
+            //             student.students.forEach(student => {
+
+            //                 const StatusRow = document.createElement("tr");  // Create a new row
+            //                 const Statuscell = document.createElement("td"); // Create a new cell
+            //                 Statuscell.textContent = student.status;         // Set the status
+            //                 StatusRow.appendChild(Statuscell);               // Add the cell to the row
+            //                 tableBody2.appendChild(StatusRow);
+
+            //             });
+
+            //         });
+            //         rightDiv.appendChild(tableBody2);
+            //     })
+            //     .catch(err => console.log("Error fetching data:", err));
+
+        </script>
+
+
+
+
+
+</body>
+
+</html>

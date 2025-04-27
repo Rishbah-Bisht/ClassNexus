@@ -65,16 +65,38 @@ router.get('/Teacher/My-Class/AllStudent/:classInfo', ensureAuth, loadTeacherDat
 });
 
 router.get('/Teacher/My-Class/Attandace',checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
+
+    res.render('Teacher_Show_Attendance_option.ejs',{className: req.teacherBasic.ClassTeacher});
+});
+
+router.get('/Teacher/My-Class/Attandace/Show-AllStudent',checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
+    const AllStudent = await User.find({class:req.teacherBasic.ClassTeacher}).sort({ name: 1 });
+    res.render('Teacher_Show_Student_Attandace.ejs',{AllStudent,className: req.teacherBasic.ClassTeacher });
+});
+
+router.get('/Teacher/My-Class/Attandace/Marked-Attandance',checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
     const AllStudent = await User.find({class:req.teacherBasic.ClassTeacher}).sort({ name: 1 });
     const alreadyMarked = false;
     res.render('Teacher_Attandance.ejs',{AllStudent,className: req.teacherBasic.ClassTeacher, alreadyMarked });
 });
 
 
+
+router.get("/api/students/Attendace",loadTeacherData, async (req, res) => {
+    try {
+      const students = await Attendance.find({class:req.teacherBasic.ClassTeacher});
+      res.json(students);
+    } catch (err) {
+      res.status(500).send("Error fetching students data");
+    }
+  });
+
+
 router.post("/mark-attendance",checkClassTime, async (req, res) => {
-    const { className,attendance } = req.body;
+    const { StudentName,className,attendance } = req.body;
     const teacherId = req.session.userId;
     const studentsAttendance = Object.keys(attendance).map(studentId => ({
+        student_Name: StudentName[studentId],
         student: studentId,
         status: attendance[studentId]
     }));
@@ -89,7 +111,7 @@ router.post("/mark-attendance",checkClassTime, async (req, res) => {
     try {
         await newAttendance.save();
         req.flash('success_msg', 'Attendace Marked successfully!');
-        res.redirect(`/Teacher/My-Class/Attandace`);
+        res.redirect(`/Teacher/My-Class/Attandace/Show-AllStudent`);
         
     } catch (err) {
         console.error("Error saving attendance", err);
