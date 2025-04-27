@@ -34,60 +34,58 @@
                             <%= error_msg %>
                         </div>
                         <% } %>
-
-                            <div class="box">
-
-                                <div class="left-side">
-                                    <% studentsAttandance.forEach(student=> {%>
-
-                                        <h2> <%= new Date(student.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></h2>
-                                        <table id="nameTable">
-                                            <thead>
+                            <h1>Class - <%= className %>
+                            </h1>
+                           
+                                <% studentsAttandance.forEach(student => { %> 
+                                    <div class="table-container">
+                                    <h2><%= new Date(student.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></h2>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Roll Number</th>
+                                                <th>Student Name</th>
+                                                <th>Student ID</th>
+                                                <th>Attendance</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% student.students.forEach(student => { %>
                                                 <tr>
-                                                    <th>Roll No</th>
-                                                    <th>Name</th>
-                                                    <th>Status</th>
+                                                    <td class="tdName"><%= student.student_Roll %></td>
+                                                    <td class="tdName"><%= student.student_Name %></td>
+                                                    <td class="tdName"><%= student.student_Id %></td>
+                                                    <td class="status"><%= student.status %></td>
                                                 </tr>
-                                            </thead>
-                                            <% student.students.forEach(student=> {%>
-                                                <tr>
-                                                    <td class="tdName">
-                                                        <%= student.student_Roll%>
-                                                    </td>
-                                                    <td class="tdName">
-                                                        <%= student.student_Name%>
-                                                    </td>
-                                                    <td class="status">
-                                                        <%= student.status %>
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <% });%>
-                                        </table>
-                                        <% });%>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
                                 </div>
+                                <% }); %>
+                            
+                            
 
 
-                            </div>
-        </div>
-   
+
+
 
 
 
 
 </body>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const statusCells = document.querySelectorAll('.status');
-    statusCells.forEach(cell => {
-        const status = cell.textContent.trim(); 
-        if (status === 'Present') {
-            cell.style.backgroundColor = 'green';
-        } else if (status === 'Absent') {
-            cell.style.backgroundColor = 'red';
-        }
+    document.addEventListener("DOMContentLoaded", function () {
+        const statusCells = document.querySelectorAll('.status');
+        statusCells.forEach(cell => {
+            const status = cell.textContent.trim();
+            if (status === 'Present') {
+                cell.style.backgroundColor = 'green';
+            } else if (status === 'Absent') {
+                cell.style.backgroundColor = 'red';
+            }
+        });
     });
-});
 
 </script>
+
 </html>

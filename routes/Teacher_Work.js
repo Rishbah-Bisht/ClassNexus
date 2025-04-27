@@ -85,10 +85,65 @@ router.get('/Teacher/My-Class/Attandace/Marked-Attandance',checkClassTime, ensur
 
 
 
+
+
+// ✅ Count by attendance status
+router.get('/x', async (req, res) => {
+    try {
+        const result = await Attendance.aggregate([
+          { $unwind: "$students" },
+          {
+            $group: {
+              _id: "$students.student_Name",
+              present: {
+                $sum: { $cond: [{ $eq: ["$students.status", "Present"] }, 1, 0] }
+              },
+              total: { $sum: 1 }
+            }
+          },
+          {
+            $project: {
+              _id: 0,
+              student: "$_id",
+              present: 1,
+              total: 1,
+              percentage: {
+                $round: [{ $multiply: [{ $divide: ["$present", "$total"] }, 100] }, 2]
+              }
+            }
+          },
+          { $sort: { percentage: -1 } }
+        ]);
+    
+        console.log(result)
+      } catch (err) {
+        res.status(500).json({ error: err.message });
+      }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.post("/mark-attendance",checkClassTime, async (req, res) => {
-    const { rollno,StudentName,className,attendance } = req.body;
+    const { StudentRegistration_Id,rollno,StudentName,className,attendance } = req.body;
     const teacherId = req.session.userId;
     const studentsAttendance = Object.keys(attendance).map(studentId => ({
+        student_Id:StudentRegistration_Id[studentId],
         student_Roll:rollno[studentId],
         student_Name: StudentName[studentId],
         student: studentId,

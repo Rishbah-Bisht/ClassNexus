@@ -32,7 +32,7 @@
                                 <th>Roll Number</th>
                                 <th>Student Name</th>
                                 <th>Father Name</th>
-                                <th>Subject ID</th>
+                                <th>Student ID</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -46,10 +46,12 @@
                                         <input type='text' name='StudentName[<%= student._id %>]' value='<%= student.name %>' readonly>
                                     </td>
                                     <td>
-                                        <%= student.fatherName %>
+                                        <input type='text' name='StudentfatherName[<%= student._id %>]' value='<%= student.fatherName %>' readonly>
+                                       
                                     </td>
                                     <td>
-                                        <%= student.Registration_Id %>
+                                        <input type='text' name='StudentRegistration_Id[<%= student._id %>]' value='<%= student.Registration_Id %>' readonly>
+                                       
                                     </td>
 
                                     <td>

@@ -17,10 +17,7 @@ const attendanceSchema = new mongoose.Schema({
   },
   students: [
     {
-      student_Id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
+      student_Id:Number ,
       student_Name:String,
       student_Roll:Number,
       status: {

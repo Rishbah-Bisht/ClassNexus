@@ -18,7 +18,9 @@
     width: 92%;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 1px solid var(--border-color);
-    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 500px;
+    margin-bottom: 20px;
 }
 
 h2 {
