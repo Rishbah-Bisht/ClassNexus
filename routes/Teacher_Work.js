@@ -71,7 +71,8 @@ router.get('/Teacher/My-Class/Attandace',checkClassTime, ensureAuth, loadTeacher
 
 router.get('/Teacher/My-Class/Attandace/Show-AllStudent',checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
     const AllStudent = await User.find({class:req.teacherBasic.ClassTeacher}).sort({ name: 1 });
-    res.render('Teacher_Show_Student_Attandace.ejs',{AllStudent,className: req.teacherBasic.ClassTeacher });
+    const studentsAttandance = await Attendance.find({class:req.teacherBasic.ClassTeacher});
+    res.render('Teacher_Show_Student_Attandace.ejs',{AllStudent,studentsAttandance,className: req.teacherBasic.ClassTeacher });
 });
 
 router.get('/Teacher/My-Class/Attandace/Marked-Attandance',checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
@@ -82,20 +83,13 @@ router.get('/Teacher/My-Class/Attandace/Marked-Attandance',checkClassTime, ensur
 
 
 
-router.get("/api/students/Attendace",loadTeacherData, async (req, res) => {
-    try {
-      const students = await Attendance.find({class:req.teacherBasic.ClassTeacher});
-      res.json(students);
-    } catch (err) {
-      res.status(500).send("Error fetching students data");
-    }
-  });
 
 
 router.post("/mark-attendance",checkClassTime, async (req, res) => {
-    const { StudentName,className,attendance } = req.body;
+    const { rollno,StudentName,className,attendance } = req.body;
     const teacherId = req.session.userId;
     const studentsAttendance = Object.keys(attendance).map(studentId => ({
+        student_Roll:rollno[studentId],
         student_Name: StudentName[studentId],
         student: studentId,
         status: attendance[studentId]

@@ -85,7 +85,7 @@ input[type="date"],input[type="text"] {
     display: flex;
    }
   .left-side {
-    width: 300px; /* Makes the left side take 48% of the page width */
+    width: 100%; /* Makes the left side take 48% of the page width */
     background-color: #f4f4f400;
   }
   
@@ -95,7 +95,9 @@ input[type="date"],input[type="text"] {
     
     margin-bottom: 20px;
   }
-  
+  .tdName{
+    width: 300px;
+  }
   .left-side th, .left-side td {
     padding: 10px;
     text-align: left;
@@ -107,48 +109,3 @@ input[type="date"],input[type="text"] {
     height: 30px;
   }
   
-  /* Styling for right-side */
-  .right-side {
-    background-color: #3d3c4600;
-    width: 100%;
-    display: flex;
-    overflow-x: scroll;
-    text-align: center;
-}
-
-.right-side::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-
-.right-side::-webkit-scrollbar-track {
-    background: #6e6d6d;
-    border-radius: 10px;
-}
-
-.right-side::-webkit-scrollbar-thumb {
-    background: #8c8888;
-    border-radius: 10px;
-}
-
-.right-side::-webkit-scrollbar-thumb:hover {
-    background: #9f9d9d;
-}
-
-  
-  .right-side table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .right-side th, .right-side td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  .right-side th {
-    height: 30px;
-    background-color: #00000000;
-  }
