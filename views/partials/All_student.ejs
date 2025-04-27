@@ -1,7 +1,9 @@
 <div class="main-content">
-    <h1>Class - <%= className %></h1>
+    <h1>Class - <%= className %>
+    </h1>
     <div class="table-container">
-        <h2>All Students In Class <%= className %></h2>
+        <h2>All Students In Class <%= className %>
+        </h2>
         <table>
             <thead>
                 <tr>
@@ -16,20 +18,30 @@
             <tbody>
                 <% if (AllStudent && AllStudent.length > 0) { %>
                     <% AllStudent.forEach((student, index) => { %>
+                        <% 
+                            let attendance = Attandance_sumary2.find(a => a.student === student.name); 
+                        %>
                         <tr>
                             <td><%= index + 1 %></td> <!-- Roll Number -->
                             <td><%= student.name %></td>
                             <td><%= student.fatherName %></td>
                             <td><%= student.Registration_Id %></td>
-                            <td>--</td> <!-- You can add attendance logic here -->
-                            <td><%= student.email %></td> 
+                            <td class="status">
+                                <% if (attendance) { %>
+                                    <%= attendance.percentage %>%
+                                <% } else { %>
+                                    -
+                                <% } %>
+                            </td> <!-- Attendance Percentage -->
+                            <td><%= student.email %></td>
                         </tr>
                     <% }) %>
                 <% } else { %>
                     <tr>
-                        <td colspan="5">No students found for this class</td>
+                        <td colspan="6">No students found for this class</td>
                     </tr>
                 <% } %>
+                
             </tbody>
         </table>
     </div>

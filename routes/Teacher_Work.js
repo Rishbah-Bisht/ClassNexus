@@ -12,19 +12,12 @@ const upload = require("../middleware/uploads");
 const { route } = require('./auth');
 const ensureAuth = require("../middleware/auth");
 const Attendance = require("../models/Attandance"); 
+const Attandance_sumary = require("../models/AttendanceSummary"); 
 const checkClassTime = require('../middleware/checkClassTime');
 const flash = require('connect-flash');
+const calculateAttendanceSummaryAndSave = require('../middleware/calculateAttendanceSummary'); 
 
 
-// Fir flash use karo
-app.use(flash());
-
-// Fir locals me flash messages set karo
-app.use((req, res, next) => {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  next();
-});
 
 
 
@@ -60,8 +53,10 @@ router.get('/Teacher/My-Class', ensureAuth,checkClassTime, loadTeacherData, asyn
 });
 
 router.get('/Teacher/My-Class/AllStudent/:classInfo', ensureAuth, loadTeacherData, async (req, res) => {
+    const className = req.teacherBasic.ClassTeacher;
     const AllStudent = await User.find({class:req.teacherBasic.ClassTeacher}).sort({ name: 1 });
-    res.render('Teacher_AllStudents.ejs',{AllStudent ,className: req.teacherBasic.ClassTeacher})
+    const Attandance_sumary2 = await Attandance_sumary.find({className:className});
+    res.render('Teacher_AllStudents.ejs',{AllStudent,Attandance_sumary2 ,className: req.teacherBasic.ClassTeacher})
 });
 
 router.get('/Teacher/My-Class/Attandace',checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
@@ -70,13 +65,17 @@ router.get('/Teacher/My-Class/Attandace',checkClassTime, ensureAuth, loadTeacher
 });
 
 router.get('/Teacher/My-Class/Attandace/Show-AllStudent',checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
-    const AllStudent = await User.find({class:req.teacherBasic.ClassTeacher}).sort({ name: 1 });
-    const studentsAttandance = await Attendance.find({class:req.teacherBasic.ClassTeacher});
-    res.render('Teacher_Show_Student_Attandace.ejs',{AllStudent,studentsAttandance,className: req.teacherBasic.ClassTeacher });
+    const className = req.teacherBasic.ClassTeacher;
+    const AllStudent = await User.find({class:className}).sort({ name: 1 });
+    const studentsAttandance = await Attendance.find({class:className});
+    
+const Attandance_sumary2 = await Attandance_sumary.find({className:className});
+    res.render('Teacher_Show_Student_Attandace.ejs',{AllStudent,Attandance_sumary2,studentsAttandance,className});
 });
 
 router.get('/Teacher/My-Class/Attandace/Marked-Attandance',checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
-    const AllStudent = await User.find({class:req.teacherBasic.ClassTeacher}).sort({ name: 1 });
+    const className = req.teacherBasic.ClassTeacher;
+    const AllStudent = await User.find({class:className}).sort({ name: 1 });
     const alreadyMarked = false;
     res.render('Teacher_Attandance.ejs',{AllStudent,className: req.teacherBasic.ClassTeacher, alreadyMarked });
 });
@@ -159,6 +158,7 @@ router.post("/mark-attendance",checkClassTime, async (req, res) => {
 
     try {
         await newAttendance.save();
+        await calculateAttendanceSummaryAndSave(className);
         req.flash('success_msg', 'Attendace Marked successfully!');
         res.redirect(`/Teacher/My-Class/Attandace/Show-AllStudent`);
         

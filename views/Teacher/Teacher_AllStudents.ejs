@@ -25,5 +25,24 @@
     <%- include('../partials/All_student') %>
  
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const statusCells = document.querySelectorAll('.status');
+        statusCells.forEach(cell => {
+            const perctange=Number(cell.textContent.split('%')[0])
+            if (perctange > 70) {
+                cell.style.color = 'Green';
+            }
+            if (perctange < 70) {
+                cell.style.color = 'yellow';
+            }if (perctange < 50) {
+                cell.style.color = 'orange';
+            }if (perctange < 30) {
+                cell.style.color = 'red';
+            }
+            
+        });
+    });
 
+</script>
 </html>
