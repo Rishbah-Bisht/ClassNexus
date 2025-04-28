@@ -1,6 +1,7 @@
-const AttendanceSummary = require('../models/AttendanceSummary'); // model ka path theek rakhna
+const AttendanceSummary = require('../models/Attandance_sumary'); // model ka path theek rakhna
 const Attendance = require("../models/Attandance"); 
 async function calculateAttendanceSummaryAndSave(className) {
+    await AttendanceSummary.deleteMany({ className: className });
     const result = await Attendance.aggregate([
         { $match: { class: className } },
         { $unwind: "$students" },

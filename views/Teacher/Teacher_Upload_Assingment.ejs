@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment Upload Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/assigment.css">
+</head>
+
+<body>
+    <%- include('../partials/Teacher_sidebar', { currentPage: 'Class' }) %>
+        <div class="main-content">
+            <h1>Upload Assignment</h1>
+            <form id="assignmentForm" action="/Upload/Assignment" method="post" enctype="multipart/form-data">
+                <div class="form-group"><input type="hidden" id='className' name="className" value="<%=className%>" readonly></div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+
+                    <% Subject.forEach(function(subject) { %>
+                        <select id="subject" name='subject' required>
+                            <% subject.subjects.forEach(function(subject) { %>
+                                <option value="<%= subject.name %>">
+                                    <%= subject.name %>
+                                </option>
+                                <% }); %>
+                        </select>
+                        <% }); %>
+
+
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Assignment Title</label>
+                    <input type="text" id="title" name='title' required placeholder="Enter assignment title">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" name='description' id="description"
+                        placeholder="Provide assignment details and instructions" required>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" name='dueDate' id="dueDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Assignment File</label>
+                    <div class="file-upload" id="fileUpload">
+                        <input type="file" id="file" name="assignmentFile" required>
+                        <p><i class="icon-upload"></i> Click to upload or drag and drop</p>
+                        <p id="fileName">No file selected</p>
+                    </div>
+
+                </div>
+
+                <button type="submit" id="submitBtn">Upload Assignment</button>
+            </form>
+
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const fileUpload = document.getElementById('fileUpload');
+                const fileInput = document.getElementById('file');
+                const fileName = document.getElementById('fileName');
+                const progressContainer = document.getElementById('progressContainer');
+                const progress = document.getElementById('progress');
+                const progressText = document.getElementById('progressText');
+                const form = document.getElementById('assignmentForm');
+                const submitBtn = document.getElementById('submitBtn');
+                const messageDiv = document.getElementById('message');
+
+                // File upload UI interaction
+                fileUpload.addEventListener('click', function () {
+                    fileInput.click();
+                });
+
+                fileInput.addEventListener('change', function () {
+                    if (fileInput.files.length > 0) {
+                        fileName.textContent = fileInput.files[0].name;
+                    } else {
+                        fileName.textContent = 'No file selected';
+                    }
+                });
+
+                // Drag and drop functionality
+                fileUpload.addEventListener('dragover', function (e) {
+                    e.preventDefault();
+                    this.classList.add('drag-over');
+                });
+
+                fileUpload.addEventListener('dragleave', function () {
+                    this.classList.remove('drag-over');
+                });
+
+                fileUpload.addEventListener('drop', function (e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+
+                    if (e.dataTransfer.files.length) {
+                        fileInput.files = e.dataTransfer.files;
+                        fileName.textContent = fileInput.files[0].name;
+                    }
+                });
+
+            });
+        </script>
+</body>
+
+</html>

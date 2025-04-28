@@ -5,7 +5,7 @@ const crypto = require("crypto");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "uploads/Profile");
+        cb(null, "uploads/Assigments");
     },
     filename: function (req, file, cb) {
         crypto.randomBytes(12, function (err, bytes) {
@@ -15,6 +15,6 @@ const storage = multer.diskStorage({
     },
 });
 
-const upload = multer({ storage: storage });
+const assigment = multer({ storage: storage });
 
-module.exports = upload;
+module.exports = assigment;
