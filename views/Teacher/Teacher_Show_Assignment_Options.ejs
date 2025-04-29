@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/profile.css">
+  <link rel="stylesheet" href="/subjects.css">
+</head>
+<body>
+    <%- include('../partials/Teacher_sidebar', { currentPage: 'Class' }) %>
+    <div class="main-content">
+        <h2>Class - <%=className %></h2>
+        <div class="allClass">
+
+
+            <a href="/Teacher/My-Class/Assingment/See-Assigment"> <i class="fa-solid fa-clipboard-user"></i>&nbsp;&nbsp;See Assignment</a>
+            <a href="/Teacher/My-Class/Assingment/Upload-Assigment"><i class="fa-solid fa-file-arrow-up"></i>&nbsp;&nbsp;Upload Assignment</a>
+      
+
+        </div>
+    </div>
+      
+</body>
+</html>

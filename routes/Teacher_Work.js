@@ -17,7 +17,7 @@ const Attandance_sumary = require("../models/Attandance_sumary");
 const checkClassTime = require('../middleware/checkClassTime');
 const Assignment = require('../middleware/assigment');
 const calculateAttendanceSummaryAndSave = require('../middleware/calculateAttendanceSummary');
-
+const Assigment_Data = require('../models/Assigment_Schema.js');
 
 
 
@@ -117,8 +117,33 @@ router.post("/mark-attendance", checkClassTime, async (req, res) => {
 
 router.get('/Teacher/My-Class/Assingment', checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
     const className = req.teacherBasic.ClassTeacher;
+    res.render('Teacher_Show_Assignment_Options.ejs',{className});
+});
+
+router.get('/Teacher/My-Class/Assingment/Upload-Assigment', checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
+    const className = req.teacherBasic.ClassTeacher;
     const Subject = await Class.find({ name: className });
     res.render('Teacher_Upload_Assingment.ejs',{Subject,className});
+});
+
+
+router.get('/download/:filename', (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, 'uploads/Assigments', filename); 
+  
+    res.download(filePath, filename, (err) => {
+      if (err) {
+        console.error('Download error:', err);
+        res.status(404).send("File not found or error downloading");
+      }
+    });
+  });
+
+router.get('/Teacher/My-Class/Assingment/See-Assigment', checkClassTime, ensureAuth, loadTeacherData, async (req, res) => {
+    const className = req.teacherBasic.ClassTeacher;
+    const Assigments = await Assigment_Data.find({ className: className });
+    console.log(Assigments)
+    res.render('Teacher_Show_Assigments.ejs',{Assigments,className});
 });
 
 
@@ -134,7 +159,7 @@ router.post('/Upload/Assignment',Assignment.single('assignmentFile'), async(req,
             dueDate,
             fileUrl
         });
-
+        req.flash('success_msg', 'Assingment Upload successfully!');
         res.status(201).json({ message: "Assignment uploaded successfully", assignment: newAssignment });
     } catch (err) {
         console.error(err);
