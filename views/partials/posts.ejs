@@ -7,9 +7,9 @@
 
   <h1>Posts</h1>
   <div class="post-btn">
-    <%user.forEach(user => {%>
-     <a href="/<%=user.role%>/add-post">Add post</a> 
-    <%});%>
+    <a href="/<%= user.role %>/add-post">Add post</a> 
+
+  
     
   </div>
 
@@ -27,7 +27,12 @@
    </div>
 
    <div id="postBox">
-     <img class="postImg" src="/<%= Post.p_path || Post.img_path %>" alt="img" />
+    <% if (Post.p_path || Post.img_path) { %>
+  <img class="postImg" src="/<%= Post.p_path || Post.img_path %>" alt="img" />
+<% } else { %>
+  <img class="postImg" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="No image available" />
+<% } %>
+
    </div>
 
    <div class="post-content">

@@ -52,13 +52,38 @@ async function loadTeacherData(req, res, next) {
 
 
 router.get('/Teacher/Profile', ensureAuth, loadTeacherData, async (req, res) => {
-    res.render('Teacher_profile.ejs', {
-        OwnerInfo: req.teacherBasic,
-        Owner_Info2: req.teacherMore
-    });
+    try {
+        const userId = req.userId;
+      const user = await User.findOne({ Registration_Id:  req.registrationId});
+    
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+      
+      const user_info = await UserMoreInfo.findOne({ User_id: user._id });
+    
+        res.render("Teacher_profile.ejs", {user,user_info , timeAgo });
+      } catch (err) {
+        console.error(err);
+        res.status(500).send("Database error");
+      }
+});
+
+router.get("/teacher/profile/profileEdit", async (req, res) => {
+  try {
+    const userId = req.userId;
+    const OwnerInfo = await User.findById(userId);
+    const Owner_2 = await UserMoreInfo.findOne({ User_id: userId });
+
+    res.render("Student_profileEdit.ejs", { OwnerInfo, Owner_2 });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Database error");
+  }
 });
 
 router.get('/Teacher/My-Class', ensureAuth, checkClassTime, loadTeacherData, async (req, res) => {
+    
     res.render('Teacher_MyClass.ejs', {
         classInfo: req.teacherBasic.ClassTeacher
     });
@@ -67,13 +92,19 @@ router.get('/Teacher/My-Class', ensureAuth, checkClassTime, loadTeacherData, asy
 router.get('/Teacher/Posts', async (req, res) => {
   const userId = req.userId;
   const className = req.className;
-  const classUsers = await User.find({ class: className }, '_id');
-  const ClassTeacher = await User.find({ ClassTeacher: className }, '_id');
-  const userIds = classUsers.map(user => user._id.toString());
-  const user = await User.find({ _id: userId });
-  // Step 2: Fetch posts of those users
-  const Posts = await AllPosts.find({ User_id: { $in: userIds } }).sort({ date: -1 });
-  const userInfos = await UserMoreInfo.find({ User_id: { $in: userIds } });
+  const classUsers = await User.find({ class: className }, '_id').lean();
+    const classTeacher = await User.find({ ClassTeacher: className }, '_id').lean();
+
+    const userIds = [
+      ...classUsers.map(user => user._id.toString()),
+      ...classTeacher.map(teacher => teacher._id.toString())
+    ];
+
+    const [Posts, userInfos, user] = await Promise.all([
+      AllPosts.find({ User_id: { $in: userIds } }).sort({ date: -1 }).lean(),
+      UserMoreInfo.find({ User_id: { $in: userIds } }).lean(),
+      User.findById(userId).lean()
+    ]);
     res.render('Teacher_Posts.ejs', { Posts, timeAgo,user,userInfos })
 });
 

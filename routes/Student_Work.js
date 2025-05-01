@@ -47,10 +47,14 @@ const timeAgo = (date) => {
 router.get("/Student/profile", async (req, res) => {
   try {
     const userId = req.userId;
-    const OwnerInfo = await User.findById(userId);
-    const Owner_Info2 = await UserMoreInfo.findOne({ User_id: userId });
+  const user = await User.findOne({ Registration_Id:  req.registrationId });
 
-    res.render("Student_profile.ejs", { OwnerInfo, Owner_Info2, timeAgo });
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
+  
+  const user_info = await UserMoreInfo.findOne({ User_id: user._id });
+    res.render("Student_profile.ejs", {user,user_info , timeAgo });
   } catch (err) {
     console.error(err);
     res.status(500).send("Database error");
@@ -58,7 +62,7 @@ router.get("/Student/profile", async (req, res) => {
 });
 
 // 📝 Edit Profile Page
-router.get("/profile/profileEdit", async (req, res) => {
+router.get("/student/profile/profileEdit", async (req, res) => {
   try {
     const userId = req.userId;
     const OwnerInfo = await User.findById(userId);
@@ -106,19 +110,34 @@ router.get('/Student/subjects', async (req, res) => {
 
 
 router.get('/Student/Posts', async (req, res) => {
-  const userId = req.userId;
-  const className = req.className;
-  const classUsers = await User.find({ class: className }, '_id');
-  const userIds = classUsers.map(user => user._id.toString());
-  const user = await User.find({ _id: userId });
-  // Step 2: Fetch posts of those users
-  const Posts = await AllPosts.find({ User_id: { $in: userIds } }).sort({ date: -1 });
+  try {
+    const { userId, className } = req;
 
-  // Step 3: Fetch User Info for profile pictures
-  const userInfos = await UserMoreInfo.find({ User_id: { $in: userIds } });
+    if (!userId) {
+      return res.status(401).send("Unauthorized: No user session found");
+    }
 
-  res.render('Student_posts.ejs', { Posts, timeAgo, user, userInfos })
+    const classUsers = await User.find({ class: className }, '_id').lean();
+    const classTeacher = await User.find({ ClassTeacher: className }, '_id').lean();
+
+    const userIds = [
+      ...classUsers.map(user => user._id.toString()),
+      ...classTeacher.map(teacher => teacher._id.toString())
+    ];
+
+    const [Posts, userInfos, user] = await Promise.all([
+      AllPosts.find({ User_id: { $in: userIds } }).sort({ date: -1 }).lean(),
+      UserMoreInfo.find({ User_id: { $in: userIds } }).lean(),
+      User.findById(userId).lean()
+    ]);
+
+    res.render('Student_posts.ejs', { Posts, timeAgo, user, userInfos });
+  } catch (err) {
+    console.error("Error in /Student/Posts:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
+
 
 
 

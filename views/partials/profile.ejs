@@ -2,33 +2,39 @@
   <div class="profileDiv">
 
     <div class="profile-header">
-      <img id="profile-picture" 
-     src="<%=  Owner_Info2.profile_img ? '/' + Owner_Info2.profile_img : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' %>" 
-     alt="Profile Picture" 
-     class="profile-picture">
+      <% if (user_info && user_info.profile_img) { %>
+        <img src="/<%= user_info.profile_img %>" alt="User" />
+      <% } else { %>
+        <img src="/uploads/Profile/Profile.png" alt="User" />
+      <% } %>
+      
 
 
       <div class="profile-info">
         <div class="userIdName">
           <h3>
-            <%= Owner_Info2.username %>
+            <%= user.username %>
           </h3>
         </div>
         <div class="profile-actions">
 
-          <a href="/profile/profileEdit" class="prof"><i class="fa-solid fa-pen-fancy"></i> Edit Profile</a>
+          <a href="/<%= user.role %>/profile/profileEdit" class="prof">
+            <i class="fa-solid fa-pen-fancy"></i> Edit Profile
+          </a>
+          
         </div>
+    
         <div class="profile-stats">
           <div>
             <p>0</p>
             <p>posts</p>
           </div>
           <div>
-            <p><%- Owner_Info2.follower %></p>
+            <p><%- user.follower %></p>
             <p>followers</p>
           </div>
           <div>
-            <p><%- Owner_Info2.following %></p>
+            <p><%- user.following %></p>
             <p>following</p>
           </div>
         </div>
@@ -37,21 +43,141 @@
     </div>
     <div class="about-user">
       <h3 class="bio_data">
-        <%= OwnerInfo.name %>
+        <%= user.name %>
       </h3>
-      <p class="bio_data"><%- Owner_Info2.bio %></p>
-
+      <% if (user_info && user_info.bio) { %>
+        <p class="bio_data"><%- user_info.bio %></p>
+      <% } else { %>
+        <p class="bio_data text-muted"></p>
+      <% } %>
       
+     
+
+
     </div>
 
     <div class="profile-container">
-
       <div class="profile-nav">
-        <button id="posts-btn" class="nav-btn active">Posts</button>
+        <button id="posts-btn" class="nav-btn active">Info</button>
         <button id="tweets-btn" class="nav-btn">Tweets</button>
+        <!-- New button will be added here -->
       </div>
 
+      <!-- Content divs -->
+      <div id="posts-content" class="content-div active">
+        <div class="profile-info">
+          <table>
+            <tr>
+              <td>Name</td>
+              <td class="colon-cell">:</td>
+              <td>
+                <%= user.name %>
+              </td>
+            </tr>
+            <tr>
+              <td>Registration ID</td>
+              <td class="colon-cell">:</td>
+              <td>
+                <%= user.Registration_Id %>
+              </td>
+            </tr>
+            <tr>
+              <td>Email-ID</td>
+              <td class="colon-cell">:</td>
+              <td>
+                <%= user.email %>
+              </td>
+            </tr>
+            <tr>
+              <td>Father Name</td>
+              <td class="colon-cell">:</td>
+              <td>
+                <%= user.fatherName %>
+              </td>
+            </tr>
+            <tr>
+              <td>D-O-B</td>
+              <td class="colon-cell">:</td>
+              <td>
+                <%= user.dob %>
+              </td>
+            </tr>
+            <% if(user.class ) {%>
+            <tr>
+              <td>Class</td>
+              <td class="colon-cell">:</td>
+              <td>
+                <%= user.class %>
+              </td>
+            </tr>
+            <%}%>
 
+            <% if(user.ClassTeacher ) {%>
+            <tr>
+              <td>Class Teacher</td>
+              <td class="colon-cell">:</td>
+              <td>
+                <%= user.ClassTeacher %>
+              </td>
+            </tr>
+            <%}%>
+
+
+            <% if(user.qualification ) {%>
+              <tr>
+                <td>Qualification</td>
+                <td class="colon-cell">:</td>
+                <td>
+                  <%= user.qualification %>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Department</td>
+                <td class="colon-cell">:</td>
+                <td>
+                  <%= user.department %>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Experience</td>
+                <td class="colon-cell">:</td>
+                <td>
+                  <%= user.experience %>
+                </td>
+              </tr>
+              <%}%>
+                <tr>
+
+                </tr>
+
+                <% if(user_info && user_info.bio){%>
+                  <tr>
+                    <td>Username</td>
+                    <td class="colon-cell">:</td>
+                    <td>
+                      <%= user_info.username %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Bio</td>
+                    <td class="colon-cell">:</td>
+                    <td>
+                      <%= user_info.bio %>
+                    </td>
+                  </tr>
+                 
+                  <%}%>
+
+          </table>
+        </div>
+
+
+
+      </div>
+      <div id="tweets-content" class="content-div">Tweets content goes here</div>
+      <!-- New content div will be added when new button is created -->
     </div>
-</div>
   </div>
+</div>

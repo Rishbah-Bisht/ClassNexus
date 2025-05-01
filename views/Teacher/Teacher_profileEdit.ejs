@@ -10,20 +10,17 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/profile.css">
- 
+  <link rel="stylesheet" href="/editProfile.css">
 
 </head>
 
 <body>
-  <%- include('../partials/Student_sidebar', { currentPage: 'profile' }) %>
+    <%- include('../partials/Teacher_sidebar', { currentPage: 'profile' }) %>
+  <%- include('../partials/profileEdit') %>
 
-  <%- include('../partials/profile') %>
+      <script src="/profileedit.js">
 
-  <!-- JavaScript -->
-  <script src="/profile.js">
-
-  </script>
+      </script>
 </body>
 
 </html>
