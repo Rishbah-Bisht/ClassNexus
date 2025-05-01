@@ -1,6 +1,6 @@
-.main-content {
+/* .main-content {
     max-width: 100%;
-}
+} */
 
 td select {
     width: 100%;
@@ -111,4 +111,32 @@ input[type="date"],input[type="text"] {
     background-color: #f2f2f200;
     height: 30px;
   }
+  .ShowAttandancePer {
+    margin-bottom: 30px;
+    border-collapse: collapse;
+    width: 98%;
+    border: 1px solid var(--border-color);
+    border-radius:15px ;
+    font-family: 'Arial', sans-serif;
+  }
   
+  .ShowAttandancePer th, .ShowAttandancePer td {
+    text-align: left;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    border: none
+  }
+  
+
+  .ShowAttandancePer td {
+    font-size: 1.3rem;
+    text-align: right;
+    border: none;
+    color: #ffffff;
+  }
+  
+  .ShowAttandancePer tr {
+    border: none;
+    
+    background-color:var(--card-color);
+  }

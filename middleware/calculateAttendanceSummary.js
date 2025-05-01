@@ -1,15 +1,21 @@
 const AttendanceSummary = require('../models/Attandance_sumary'); // model ka path theek rakhna
-const Attendance = require("../models/Attandance"); 
+const Attendance = require("../models/Attandance");
+
 async function calculateAttendanceSummaryAndSave(className) {
+    // Purani summary hatao
     await AttendanceSummary.deleteMany({ className: className });
+
     const result = await Attendance.aggregate([
         { $match: { class: className } },
         { $unwind: "$students" },
         {
             $group: {
-                _id: "$students.student_Name",
+                _id: "$students.student_Id",
+                student: { $first: "$students.student_Name" },
                 present: {
-                    $sum: { $cond: [{ $eq: ["$students.status", "Present"] }, 1, 0] }
+                    $sum: {
+                        $cond: [{ $eq: ["$students.status", "Present"] }, 1, 0]
+                    }
                 },
                 total: { $sum: 1 }
             }
@@ -17,7 +23,8 @@ async function calculateAttendanceSummaryAndSave(className) {
         {
             $project: {
                 _id: 0,
-                student: "$_id",
+                student_id: "$_id",
+                student: "$student",
                 present: 1,
                 total: 1,
                 percentage: {
@@ -32,6 +39,7 @@ async function calculateAttendanceSummaryAndSave(className) {
     for (const student of result) {
         await AttendanceSummary.create({
             student: student.student,
+            student_id: student.student_id,
             present: student.present,
             total: student.total,
             percentage: student.percentage,

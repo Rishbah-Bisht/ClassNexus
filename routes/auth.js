@@ -115,20 +115,21 @@ router.post("/login", async (req, res) => {
     const user_2 = await user_more_info.findOne({ User_id: user._id });
 
 
-    if ( user_2 &&
+    if (user_2 &&
       user_2.profile_img && user_2.profile_img.trim() !== '' &&
       user_2.username && user_2.username.trim() !== '' &&
       user_2.bio && user_2.bio.trim() !== '') {
 
       req.session.userId = user._id;
       req.session.registrationId = user.Registration_Id;
-    
+      req.session.className = user.class;
+
       req.session.save(err => {
         if (err) {
           console.error("Session save error:", err);
           return res.status(500).send("Session error");
         }
-    
+
         if (user.role === "Admin") {
           return res.redirect("/Admin/Dashboard");
         } else if (user.role === "student") {
@@ -142,9 +143,13 @@ router.post("/login", async (req, res) => {
     } else {
       req.session.userId = user._id;
       req.session.registrationId = user.Registration_Id;
+
+      req.session.className = user.class;
+
+
       res.render('userInfo.ejs');
     }
-    
+
 
 
 
