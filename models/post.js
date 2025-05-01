@@ -2,11 +2,12 @@
 const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
-    _id: String,
+    User_id: String,
     username:String,
-    p_path:String,
+    Registration_Id:Number,
+    className:String,
+    img_path:String,
     p_like: Number,
-    userProfile:String,
     description:String,
     p_comments:[
         {username:String, comments:String}

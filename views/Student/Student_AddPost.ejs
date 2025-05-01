@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Image with Description</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/add_post.css">
 </head>
@@ -13,75 +16,7 @@
 <%- include('../partials/Student_sidebar', { currentPage: 'posts' }) %>
 <%- include('../partials/AddPost') %>
 
-    <script>
-        const uploadArea = document.getElementById('upload-area');
-        const fileInput = document.getElementById('file-input');
-        const previewContainer = document.getElementById('preview-container');
-        const imagePreview = document.getElementById('image-preview');
-        const fileInfo = document.getElementById('file-info');
-        const browseBtn = uploadArea.querySelector('.browse-btn');
-        
-        // Handle click on upload area
-        uploadArea.addEventListener('click', () => {
-            fileInput.click();
-        });
-        
-        browseBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent triggering the upload area click
-            fileInput.click();
-        });
-        
-        // Handle file selection
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                // Display preview
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    imagePreview.src = event.target.result;
-                    previewContainer.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-                
-                // Display file info
-                fileInfo.textContent = `${file.name} (${formatFileSize(file.size)})`;
-            }
-        });
-        
-        // Handle drag and drop
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = 'var(--border-hover)';
-            uploadArea.style.backgroundColor = '#333';
-        });
-        
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = 'var(--border)';
-            uploadArea.style.backgroundColor = 'var(--dropzone-bg)';
-        });
-        
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.style.borderColor = 'var(--border)';
-            uploadArea.style.backgroundColor = 'var(--dropzone-bg)';
-            
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                const changeEvent = new Event('change');
-                fileInput.dispatchEvent(changeEvent);
-            }
-        });
-        
-        // Format file size
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-        
-    
+    <script src="post.js">
     </script>
 </body>
 </html>

@@ -1,4 +1,10 @@
 <div class="main-content">
+  <% if (success_msg) { %>
+    <div class="alert alert-success">
+      <%= success_msg %>
+    </div>
+  <% } %>
+  
     <h1>Posts</h1>
     <div class="post-btn">
       <a href="/add-post">Add post</a>
