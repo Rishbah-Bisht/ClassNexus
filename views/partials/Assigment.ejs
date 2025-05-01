@@ -1,0 +1,57 @@
+<div class="main-content">
+    <% if (success_msg) { %>
+        <div class="alert alert-success">
+          <%= success_msg %>
+        </div>
+      <% } %>
+      
+    <h2> Assigments</h2>
+            <% Assigments.forEach((A) => { %>
+        <div class="assignment-card">
+            <div class="card-header">
+                <span class="class-name">Class : <%= A.className %></span>
+                <span class="subject"><%= A.subject %></span>
+            </div>
+            
+            <h3 class="title"><%= A.title %></h3>
+            
+            <p class="description">
+                <%= A.description %>
+            </p>
+            
+            <div class="dates-container">
+                <div class="date-item">
+                    <span class="date-label">Uploaded</span>
+                    <span class="date-value1"><% 
+                        const dateObj = new Date(A.uploadedAt);
+                        const options = { weekday: 'long' }; // To get full day name (Monday, Tuesday, etc.)
+                        const dayName = dateObj.toLocaleDateString('en-US', options);
+                        const formattedDate = dateObj.toISOString().split('T')[0]; // YYYY-MM-DD format
+                      %>
+                      
+                      <p><%= dayName %>, <%= formattedDate %></p>
+                      </span>
+                </div>
+    
+                <div class="date-item">
+                    <span class="date-label">Due Date</span>
+                    <span class="date-value2"><% 
+                        const dueDateObj = new Date(A.dueDate);
+                        const dueOptions = { weekday: 'long' }; // To get full day name (Monday, Tuesday, etc.)
+                        const dueDayName = dueDateObj.toLocaleDateString('en-US', dueOptions);
+                        const dueFormattedDate = dueDateObj.toISOString().split('T')[0]; // YYYY-MM-DD format
+                      %>
+                      
+                      <p><%= dueDayName %>, <%= dueFormattedDate %></p>
+                      </span>
+                </div>
+                
+            </div>
+            
+        
+            <a href="/uploads/Assigments/<%= A.fileUrl.split('\\').pop() %> " class="file-link" download>Download</a>
+    
+        </div>
+        <% }); %>
+    
+    </div>

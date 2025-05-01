@@ -70,12 +70,13 @@ td {
 
 
 .allClass{
+    width: 800px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 30px;
     padding: 20px;
     border-radius: 8px;
-    margin: 20px 0;
+    margin: 20px auto;
     
 }
 .allClass a{

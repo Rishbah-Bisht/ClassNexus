@@ -187,4 +187,12 @@ router.get('/Student/Attandance', async (req, res) => {
   }
 });
 
+
+router.get('/Student/Assigment', async (req, res) => {
+  const className = req.className;
+  const Assigments = await Assigment_Data.find({ className: className });
+  res.render('Student_Assigment.ejs',{Assigments,className});
+});
+
+
 module.exports = router;

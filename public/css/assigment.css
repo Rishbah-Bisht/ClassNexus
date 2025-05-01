@@ -232,9 +232,7 @@ button:disabled {
     padding: 12px 15px;
     border-radius: 8px;
 }
-.dates-container p{
-    color: #b0b0b0;
-}
+
 .date-item {
     flex: 1;
 }
@@ -247,10 +245,18 @@ button:disabled {
     margin-bottom: 5px;
 }
 
-.date-value {
-    color: var(--text-color);
-    font-weight: 500;
+.date-value1 {
+    color: rgb(32, 208, 32); /* bright green */
+    font-weight: 600;
+    font-size: 1.1rem;
 }
+
+.date-value2 {
+    color: #e60000; /* strong red */
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
 
 .file-link {
     display: inline-flex;

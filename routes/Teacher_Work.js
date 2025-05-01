@@ -160,7 +160,8 @@ router.post('/Upload/Assignment',Assignment.single('assignmentFile'), async(req,
             fileUrl
         });
         req.flash('success_msg', 'Assingment Upload successfully!');
-        res.status(201).json({ message: "Assignment uploaded successfully", assignment: newAssignment });
+        res.redirect('/Teacher/My-Class/Assingment/See-Assigment')
+       
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Error uploading assignment" });
