@@ -10,14 +10,16 @@
                 <input type="file" id="file-input" name="image" accept="image/*">
                 <button type="button" class="browse-btn">Select Image</button>
             </div>
-
-            <div class="preview-container" id="preview-container">
+            <div class="Disable">
                 <input type="text" value="<%= student_id %>" name="student_id" readonly>
                 <input type="text" value="<%= className %>" name="className" readonly>
                 <input type="text" value="<%= userId %>" name="userId" readonly>
                 <% userInfo.forEach((user)=> { %>
-                <input type="text" value="<%= user.username %>" name="username" readonly>
-                <% }); %>
+                    <input type="text" value="<%= user.username %>" name="username" readonly>
+                    <% }); %>
+            </div>
+            <div class="preview-container" id="preview-container">
+
 
 
                 <img id="image-preview" src="#" alt="Preview">

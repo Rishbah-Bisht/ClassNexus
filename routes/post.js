@@ -6,7 +6,7 @@ const User = require('../models/user_login_info');
 const UserMoreInfo = require("../models/user_more_info");
 const ensureAuth = require("../middleware/auth");
 const upload = require("../middleware/uploads");
-
+const AddPost = require("../models/addPost");
 
 
 router.use(ensureAuth, (req, res, next) => {
@@ -36,28 +36,51 @@ router.get('/add-post', async (req, res) => {
     res.render('Student_AddPost', { student_id, className, userId, userInfo });
 });
 
+router.get("/Posts", async (req, res) => {
+    try {
+        const userId = req.userId;
+        const user = await User.findById(userId);
+        const AllPosts = await AddPost.find({ user_id: userId }).sort({ createdAt: -1 });
+
+        console.log(AllPosts)
+        // if (user.role === "Admin") {
+        //     return res.redirect("/Admin/Dashboard");
+        // } else if (user.role === "student") {
+        //     return res.render("Student_posts.ejs", { AllPosts });
+        // } else if (user.role === "teacher") {
+        //     return res.redirect("/Teacher/profile");
+        // } else {
+        //     return res.send("❓ Unknown role");
+        // }
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Database error");
+    }
+});
+
 
 router.post('/Add-New-post', upload.single('image'), async (req, res) => {
     const data = req.body;
-  
-    const newPost = new Post({
-      student_id: data.student_id,
-      className: data.className,
-      userId: data.userId,
-      username: data.username,
-      description: data.description,
-      img_path: req.file.path
-    });
-  
     try {
-      await newPost.save();
-      req.flash('success_msg', 'Post uploaded successfully!');
-      res.redirect('/add-post');
+        const newPost = new Post({
+            student_id: data.student_id,
+            className: data.className,
+            regRegistration_Id: data.userId,
+            username: data.username,
+            description: data.description,
+            img_path: req.file.path
+        });
+
+
+        await newPost.save();
+        req.flash('success_msg', 'Post uploaded successfully!');
+        res.redirect('/Posts');
     } catch (err) {
-      console.error('Error saving post:', err);
-      res.status(500).send('Error saving post');
+        console.error('Error saving post:', err);
+        res.status(500).send('Error saving post');
     }
-  });
+});
 
 
 

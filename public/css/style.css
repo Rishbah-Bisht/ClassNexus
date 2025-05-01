@@ -97,7 +97,9 @@ a:hover {
   color: white;
   transform: translateX(5px);
 }
-
+.Disable{
+  opacity: 0;
+}
 .sidebar nav a.active {
   background: linear-gradient(90deg, rgba(118, 55, 219, 0.2), transparent);
   color: white;

@@ -39,46 +39,9 @@ const timeAgo = (date) => {
   return `${days} days ago`;
 };
 
-// 📄 All Posts of Student
-router.get("/Student/posts", async (req, res) => {
-  try {
-    const userId = req.userId;
-    const user = await User.findById(userId);
-    const AllPosts = await AddPost.find({ user_id: userId }).sort({ createdAt: -1 });
 
-    res.render("Student_posts.ejs", {
-      users: [user],
-      AllPosts,
-      timeAgo
-    });
 
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Database error");
-  }
-});
 
-// 📝 Save New Post
-router.post('/save-Post', upload.single('image'), async (req, res) => {
-  const { description } = req.body;
-  const userId = req.userId;
-
-  try {
-    const imagePath = req.file ? req.file.path.replace("public/", "") : null;
-
-    const NewPost = new AddPost({
-      user_id: userId,
-      p_path: imagePath,
-      description: description
-    });
-
-    await NewPost.save();
-    res.redirect('/Student/posts');
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error saving post");
-  }
-});
 
 // ➕ Add Post Page
 router.get("/Student/add-post", (req, res) => {

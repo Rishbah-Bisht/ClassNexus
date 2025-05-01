@@ -64,3 +64,27 @@ function formatFileSize(bytes) {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    const fileInput = document.getElementById("file-input");
+    const submitBtn = document.querySelector(".submit-btn");
+
+    // Start with button disabled
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = "0.6";
+    submitBtn.style.cursor = "not-allowed";
+
+    fileInput.addEventListener("change", function () {
+      if (fileInput.files.length > 0) {
+        // Image selected — enable the button
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = "1";
+        submitBtn.style.cursor = "pointer";
+      } else {
+        // No image — disable the button
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = "0.6";
+        submitBtn.style.cursor = "not-allowed";
+      }
+    });
+  });
