@@ -114,7 +114,10 @@
     display: none;
     padding: 20px;
   }
-
+.profileDiv{
+  width: 800px;
+  margin: auto;
+}
   .content-section.active {
     display: block;
   }

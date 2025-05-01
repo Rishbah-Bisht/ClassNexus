@@ -43,8 +43,13 @@ router.post('/Save-User-Data', upload.single('profileImage'), async (req, res) =
             });
             await user_info.save();
         }
-
-        return res.redirect(user.role === "Admin" ? "/Admin/Dashboard" : "/Student/profile");
+        const roleRoutes = {
+            Admin: "/Admin/Dashboard",
+            student: "/Student/profile",
+            teacher: "/Teacher/profile"
+          };
+          
+          return res.redirect(roleRoutes[user.role] || "/UnknownRole");
     } catch (err) {
         console.error("Error saving user data:", err);
         res.status(500).send("Error saving user data");

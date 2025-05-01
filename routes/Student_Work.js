@@ -6,7 +6,7 @@ const fs = require("fs");
 const Class = require('../models/classe');
 const User = require('../models/user_login_info');
 const UserMoreInfo = require("../models/user_more_info");
-const AddPost = require("../models/addPost");
+const AllPosts = require("../models/post");
 const tweet = require("../models/tweet");
 const upload = require("../middleware/uploads");
 const Assigment_Data = require('../models/Assigment_Schema.js');
@@ -42,11 +42,6 @@ const timeAgo = (date) => {
 
 
 
-
-// ➕ Add Post Page
-router.get("/Student/add-post", (req, res) => {
-  res.render("Student_AddPost.ejs");
-});
 
 // 👤 Student Profile
 router.get("/Student/profile", async (req, res) => {
@@ -109,6 +104,46 @@ router.get('/Student/subjects', async (req, res) => {
   }
 });
 
+
+router.get('/Student/Posts', async (req, res) => {
+  const userId = req.userId;
+  const className = req.className;
+  const classUsers = await User.find({ class: className }, '_id');
+  const userIds = classUsers.map(user => user._id.toString());
+  const user = await User.find({ _id: userId });
+  // Step 2: Fetch posts of those users
+  const Posts = await AllPosts.find({ User_id: { $in: userIds } }).sort({ date: -1 });
+
+  // Step 3: Fetch User Info for profile pictures
+  const userInfos = await UserMoreInfo.find({ User_id: { $in: userIds } });
+
+  res.render('Student_posts.ejs', { Posts, timeAgo, user, userInfos })
+});
+
+
+
+router.get('/student/add-post', async (req, res) => {
+  try {
+    const { registrationId, className, userId } = req;
+
+    if (!userId) {
+      return res.status(401).send("Unauthorized: No user session found");
+    }
+
+    const userInfo = await UserMoreInfo.find({ User_id: userId });
+
+    res.render('Student_AddPost', {
+      registrationId,
+      className,
+      userId,
+      userInfo
+    });
+  } catch (err) {
+    console.error("Error in /student/add-post:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 // 📚 Attendance Page
 router.get('/Student/Attandance', async (req, res) => {
   try {
@@ -154,7 +189,7 @@ router.get('/Student/Attandance', async (req, res) => {
 router.get('/Student/Assigment', async (req, res) => {
   const className = req.className;
   const Assigments = await Assigment_Data.find({ className: className });
-  res.render('Student_Assigment.ejs',{Assigments,className});
+  res.render('Student_Assigment.ejs', { Assigments, className });
 });
 
 

@@ -1,8 +1,11 @@
 <div class="main-content">
-
+  <div class="profileDiv">
 
     <div class="profile-header">
-      <img id="profile-picture" src="<%= Owner_Info2?.profile_img ? '/' + Owner_Info2.profile_img : '/uploads/Profile.png' %>" alt="Profile Picture" class="profile-picture">
+      <img id="profile-picture" 
+     src="<%=  Owner_Info2.profile_img ? '/' + Owner_Info2.profile_img : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' %>" 
+     alt="Profile Picture" 
+     class="profile-picture">
 
 
       <div class="profile-info">
@@ -50,5 +53,5 @@
 
 
     </div>
-
+</div>
   </div>

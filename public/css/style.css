@@ -91,7 +91,15 @@ a:hover {
   transition: all 0.3s;
   font-weight: 500;
 }
-
+.container {
+  max-width: 700px;
+  margin: auto;
+  border: 1px solid grey;
+  padding: 20px 10px;
+  padding-left:20px ;
+  border-radius: 10px;
+  width: 100%;
+}
 .sidebar nav a:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
@@ -149,10 +157,12 @@ a:hover {
 
 /* Posts */
 .post {
+  width: 700px;
   background-color: rgba(30, 30, 30, 0);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   padding: 25px;
+  margin: auto;
   margin-bottom: 25px;
   color: var(--text-color);
   transition: transform 0.3s, box-shadow 0.3s;

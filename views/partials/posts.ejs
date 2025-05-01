@@ -4,45 +4,46 @@
       <%= success_msg %>
     </div>
   <% } %>
-  
-    <h1>Posts</h1>
-    <div class="post-btn">
-      <a href="/add-post">Add post</a>
-    </div>
-    <!-- Post Template -->
-    <% for (let Post of AllPosts) { %>
-    <div class="post">
-      <% users.forEach(function(userData) { %>
-      <div class="post-header">
-        <!-- Corrected img src and username rendering -->
-        <img src="/<%= userData.profile_img %>" alt="User">
-        <div>
-          <h3><%= userData.username %></h3>
-          
-        </div>
-        &#46;
 
-        <p class="timeAgo"><%= timeAgo(new Date(Post.createdAt)) %></p>
-      </div>
-      <% }); %>
-      <div id="postBox">
-        <!-- Corrected post image rendering -->
-        <img class="postImg" src="/<%= Post.p_path %>" alt="img" />
-      </div>
-      <div class="post-content">
-        <!-- Corrected post description rendering -->
-        <%= Post.description %>
-      </div>
-      <div class="post-actions">
-        <button class=" "><i class="fa-solid fa-heart likeBtn"></i>
-          <p>0</p>
-        </button>
-        <button><i class="fa-solid fa-comments noComnt"></i></button>
-      </div>
-      <div class="comntDisplayNone">
-        <div class="comnts-box"></div>
-        <input type="text" placeholder="What on your mind?" id="comntInput">
-      </div>
-    </div>
-    <% } %>
+  <h1>Posts</h1>
+  <div class="post-btn">
+    <%user.forEach(user => {%>
+     <a href="/<%=user.role%>/add-post">Add post</a> 
+    <%});%>
+    
   </div>
+
+  <% Posts.forEach(function(Post) { 
+    const userInfo = userInfos.find(info => info.User_id.toString() === Post.User_id.toString());
+%>
+ <div class="post">
+   <div class="post-header">
+     <img src="/<%= userInfo?.profile_img || 'default.jpg' %>" alt="User" />
+
+     <div>
+       <h3><a href='<%= Post.username %>'><%= Post.username %></a></h3>
+     </div>
+     <p class="timeAgo"><%= timeAgo(new Date(Post.date)) %></p>
+   </div>
+
+   <div id="postBox">
+     <img class="postImg" src="/<%= Post.p_path || Post.img_path %>" alt="img" />
+   </div>
+
+   <div class="post-content">
+     <%= Post.description %>
+   </div>
+
+   <div class="post-actions">
+     <button><i class="fa-solid fa-heart likeBtn"></i><p>0</p></button>
+     <button><i class="fa-solid fa-comments noComnt"></i></button>
+   </div>
+
+   <div class="comntDisplayNone">
+     <div class="comnts-box"></div>
+     <input type="text" placeholder="What’s on your mind?" id="comntInput">
+   </div>
+ </div>
+<% }); %>
+
+</div>

@@ -11,7 +11,8 @@ const postSchema = new mongoose.Schema({
     description:String,
     p_comments:[
         {username:String, comments:String}
-    ]
+    ],
+    date: { type: Date, default: Date.now } 
 });
 
 module.exports = mongoose.model("Post", postSchema);
