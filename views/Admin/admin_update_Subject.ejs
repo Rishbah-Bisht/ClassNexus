@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Subject</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/slide_bar.css">
+    <link rel="stylesheet" href="/admin_update_Subject.css">
+</head>
+
+<body>
+    <%- include('../partials/Admin_sidebar', { currentPage: 'Class' }) %>
+
+        <div class="main-content">
+            <div class="edit-subject-container">
+                <a href="/Admin/Class/subject" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Back to Subjects
+                </a>
+
+                <h1>Edit Subject for Class - ( <%= className %> ) 
+                </h1>
+
+                <% classDoc.subjects.forEach(e => { %>
+                    <% if (e._id.toString() === subjectId.toString()) { %>
+                      <form action="/Admin/Class/subject/edit-subject/<%= e._id %>" method="POST">
+                  
+                        <div class="form-group">
+                          <label for="SubjectName">Subject Name</label>
+                          <input type="text" id="SubjectName" name="SubjectName" value="<%= e.name %>" required readonly/>
+                        </div>
+                        <div class="form-group">
+                         
+                          <input type="hidden" id="className" name="className" value="<%= className %>" required />
+                        </div>
+                  
+                        <div class="form-group">
+                          <label for="SubjCode">Subject Code</label>
+                          <input type="text" id="SubjCode" name="SubjCode" value="<%= e.code %>" required readonly />
+                        </div>
+                  
+                        <div class="form-group">
+                          <label for="teacher">Teacher Name</label>
+                          <input type="text" id="teacher" name="teacher" value="<%= e.teacher %>" required />
+                        </div>
+                  
+                        <div class="form-group">
+                          <label for="teacher_ID">Teacher ID</label>
+                          <input type="number" id="teacher_ID" name="teacher_ID" value="<%= e.teacher_ID %>" required />
+                        </div>
+                  
+                        <button type="submit" class="btn btn-primary btn-block">
+                          <i class="fas fa-save"></i> Update Teacher
+                        </button>
+                      </form>
+                    <% } %>
+                  <% }) %>
+                  
+            </div>
+        </div>
+</body>
+
+</html>

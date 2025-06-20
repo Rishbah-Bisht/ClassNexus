@@ -113,8 +113,10 @@ input[type="date"],input[type="text"] {
   }
   .ShowAttandancePer {
     margin-bottom: 30px;
+    padding:10px 20px ;
     border-collapse: collapse;
-    width: 98%;
+    width: 97%;
+    background-color: rgb(174, 174, 174);
     border: 1px solid var(--border-color);
     border-radius:15px ;
     font-family: 'Arial', sans-serif;

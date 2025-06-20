@@ -1,0 +1,105 @@
+:root {
+    --bg-color: #f5f5f5;
+    --card-color: #ffffff;
+    --text-color: #1a1a1a;
+    --accent-color: #a378e9;
+    --accent-hover: #a89eb6;
+    --input-bg: #eeeeee;
+    --border-color: #ccc;
+}
+/* Main content container */
+.main-content {
+    margin-left: 230px; /* width of sidebar */
+    padding: 30px;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* Panels for students and teachers */
+.panel {
+    background-color: var(--card-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
+}
+
+/* Panel headers */
+.panel h2 {
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    font-size: 20px;
+}
+
+/* Search bar */
+.search-bar {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-bar:focus {
+    border-color: var(--accent-color);
+    box-shadow: var(--glow);
+}
+
+/* Student & Teacher card container (clickable link) */
+.student-container,
+.teacher-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--input-bg);
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.student-container:hover,
+.teacher-container:hover {
+    background-color: var(--accent-hover);
+    color: white;
+    box-shadow: var(--glow);
+}
+
+/* Info section inside card */
+.student-info,
+.teacher-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Name & ID */
+.student-name,
+.teacher-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.student-id,
+.teacher-id,
+.time-ago {
+    font-size: 13px;
+    color: #555;
+    margin-top: 4px;
+}
+
+/* On hover, override child text color */
+.student-container:hover .student-id,
+.teacher-container:hover .teacher-id,
+.student-container:hover .time-ago,
+.teacher-container:hover .time-ago {
+    color: #f1f1f1;
+}

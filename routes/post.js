@@ -55,7 +55,8 @@ router.post('/Add-New-post', upload.single('image'), async (req, res) => {
             User_id: data.userId,
             username: data.username,
             description: data.description,
-            img_path: req.file.path
+            img_path: req.file.path,
+            user_role:data.role
         });
 
 

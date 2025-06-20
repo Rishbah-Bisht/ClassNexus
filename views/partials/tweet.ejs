@@ -1,33 +1,45 @@
+<div class="main-content">
+  <h1>Tweet's</h1>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <h1>Tweet's</h1>
-
-    <!-- Create Post Section -->
-    <form class="create-post" action="/save-tweet" method="POST">
-      <input placeholder="What's on your mind?" name="tweets">
-      <button >Post</button>
-    </form>
-    <% for (let tweet of Alltweets) { %>
-      <div class="post">
-        <div class="post-header">
-          <img src="/<%= OwnerInfo.profile_img %>" alt="User">
-          <div>
-            <h3><%= OwnerInfo.username %></h3>
-            
-          </div>
-          &#46;
-          <p class="timeAgo"><%= timeAgo(new Date(tweet.createdAt)) %></p>
-        </div>
-          <div class="post-content">
-              <%= tweet.newtweet %>
-          </div>
-          <div class="post-actions">
-              <button><i class="fa-solid fa-heart likeBtn"></i> <p><%= tweet.p_like %></p></button>
-              <button><i class="fa-solid fa-comments noComnt"></i></button>
-          </div>
-      </div>
-  <% } %>
-  
+  <!-- Create Post Section -->
+<form class="create-post" action="/save-tweet" method="POST">
+    <input type="hidden" name="registrationId" value="<%= registrationId %>">
+    <input type="hidden" name="className" value="<%= className %>">
+    <input type="hidden" name="userId" value="<%= userId %>">
+    <input type="hidden" name="username" value="<%=user_role.username %>">
+    <input type="hidden" name="role" value="<%=user_role.role %>">
     
-  </div>
+    <textarea name="tweets" required></textarea>
+    <button type="submit">Post</button>
+</form>
+
+  <% for (let tweet of Tweets) { 
+    const role = tweet.user_role?.toLowerCase() || 'student'; // Default to student if not specified
+  %>
+    <div class="post">
+
+      <div class="post-header role-<%= role %>">
+        <img src="/<%= tweet.profile_img || 'default.jpg' %>" alt="User" class="user-avatar" />
+        <div class="user-info">
+          <h3><%= tweet.username %></h3>
+          <span class="role-badge <%= role %>">
+            <% if (role === 'student') { %>
+              <i class="fas fa-user-graduate"></i>
+            <% } else if (role === 'teacher') { %>
+              <i class="fas fa-chalkboard-teacher"></i>
+            <% } else if (role === 'admin') { %>
+              <i class="fas fa-user-shield"></i>
+            <% } %>
+            <%= role %>
+          </span>
+        </div>
+        <span class="separator">·</span>
+        <p class="timeAgo"><%= timeAgo(new Date(tweet.createdAt)) %></p>
+      </div>
+
+      <div class="post-content">
+        <%= tweet.newtweet %>
+      </div>
+    </div>
+  <% } %>
+</div>

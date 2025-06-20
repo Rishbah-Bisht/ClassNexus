@@ -1,54 +1,66 @@
-<div class="main-content">
-  <% if (success_msg) { %>
-    <div class="alert alert-success">
-      <%= success_msg %>
-    </div>
-  <% } %>
+<main class="main-content">
 
-  <h1>Posts</h1>
-  <div class="post-btn">
-    <a href="/<%= user.role %>/add-post">Add post</a> 
+    <header class="page-header">
+        <h1>Posts</h1>
+        <div class="post-btn">
+            <a href="/<%= user.role %>/add-post" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Post
+            </a>
+        </div>
+    </header>
 
-  
-    
-  </div>
+<section class="posts-container">
+    <% Posts.forEach(function(Post) { 
+        const userInfo = userInfos.find(info => info.User_id.toString() === Post.User_id.toString());
+        const role = Post.user_role.toLowerCase(); // Get role in lowercase
+    %>
+        <article class="post" aria-labelledby="post-<%= Post._id %>-title">
+        
+            <header class="post-header role-<%= role %>">
+                <img src="/<%= userInfo?.profile_img || 'default.jpg' %>"
+                    alt="<%= Post.username %>'s profile picture" class="user-avatar">
 
-  <% Posts.forEach(function(Post) { 
-    const userInfo = userInfos.find(info => info.User_id.toString() === Post.User_id.toString());
-%>
- <div class="post">
-   <div class="post-header">
-     <img src="/<%= userInfo?.profile_img || 'default.jpg' %>" alt="User" />
-
-     <div>
-       <h3><a href='<%= Post.username %>'><%= Post.username %></a></h3>
-     </div>
-     <p class="timeAgo"><%= timeAgo(new Date(Post.date)) %></p>
-   </div>
-
-   <div id="postBox">
-    <% if (Post.p_path || Post.img_path) { %>
-  <img class="postImg" src="/<%= Post.p_path || Post.img_path %>" alt="img" />
-<% } else { %>
-  <img class="postImg" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="No image available" />
-<% } %>
-
-   </div>
-
-   <div class="post-content">
-     <%= Post.description %>
-   </div>
-
-   <div class="post-actions">
-     <button><i class="fa-solid fa-heart likeBtn"></i><p>0</p></button>
-     <button><i class="fa-solid fa-comments noComnt"></i></button>
-   </div>
-
-   <div class="comntDisplayNone">
-     <div class="comnts-box"></div>
-     <input type="text" placeholder="What’s on your mind?" id="comntInput">
-   </div>
- </div>
-<% }); %>
-
-</div>
+                <div class="user-info">
+                    <div class="user-name-wrapper">
+                        
+                        <h2 id="post-<%= Post._id %>-title" class="username">
+                          <a href="/<%= Post.username %>">
+                                <%= Post.username %>
+                            </a> 
+                            <span class="role-badge <%= role %>">
+                            <% if (role === 'student') { %>
+                                <i class="fas fa-user-graduate"></i>
+                            <% } else if (role === 'teacher') { %>
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            <% } else if (role === 'admin') { %>
+                                <i class="fas fa-user-shield"></i>
+                            <% } %>
+                            <%= Post.user_role %>
+                        </span>
+                        </h2>
+                        
+                        </div>
+                        <time datetime="<%= new Date(Post.date).toISOString() %>" class="timeAgo">
+                        <%= timeAgo(new Date(Post.date)) %>
+                    </time>
+                         
+                    
+                    </div>
+                
+            </header>
+            <div class="post-media">
+                <% if (Post.p_path || Post.img_path) { %>
+                    <img class="post-image" src="/<%= Post.p_path || Post.img_path %>"
+                        alt="Post by <%= Post.username %>">
+                <% } else { %>
+                    <div class="no-image-placeholder">
+                        <i class="fas fa-image"></i>
+                    </div>
+                <% } %>
+                <div class="post-content">
+                    <p><%= Post.description %></p>
+                </div>
+            </div>
+        </article>
+    <% }); %>
+</section>

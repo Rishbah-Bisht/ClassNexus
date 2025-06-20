@@ -47,9 +47,9 @@ router.post('/Save-User-Data', upload.single('profileImage'), async (req, res) =
             Admin: "/Admin/Dashboard",
             student: "/Student/profile",
             teacher: "/Teacher/profile"
-          };
-          
-          return res.redirect(roleRoutes[user.role] || "/UnknownRole");
+        };
+
+        return res.redirect(roleRoutes[user.role] || "/UnknownRole");
     } catch (err) {
         console.error("Error saving user data:", err);
         res.status(500).send("Error saving user data");
@@ -58,21 +58,25 @@ router.post('/Save-User-Data', upload.single('profileImage'), async (req, res) =
 
 // ✅ Save tweet
 router.post("/save-tweet", async (req, res) => {
-    const { tweets } = req.body;
-    const userId = req.session.userId;
+    const data = req.body;
 
     try {
         const newTweet = new Tweet({
-            User_id: userId,
-            p_like: 0,
-            newtweet: tweets,
-            p_comments: []
+            Registration_Id: data.registrationId,
+            className: data.className,
+            User_id: data.userId,
+            username: data.username,
+            description: data.tweets,
+            user_role: data.role
         });
+        
         await newTweet.save();
-        res.redirect("tweets");
+        res.redirect("/tweets"); 
     } catch (err) {
         console.error(err);
-        res.status(500).send("Database error");
+        // Better error handling
+        req.flash('error', 'Failed to save tweet');
+        res.redirect("/tweets"); 
     }
 });
 

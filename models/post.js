@@ -8,6 +8,7 @@ const postSchema = new mongoose.Schema({
     className:String,
     img_path:String,
     p_like: Number,
+    user_role: String,
     description:String,
     p_comments:[
         {username:String, comments:String}

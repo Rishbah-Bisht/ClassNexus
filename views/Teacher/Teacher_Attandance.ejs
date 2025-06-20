@@ -10,9 +10,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/profile.css">
+
     <link rel="stylesheet" href="/subjects.css">
-    <link rel="stylesheet" href="/Attandance.css">
+     <link rel="stylesheet" href="/slide_bar.css">
+    <link rel="stylesheet" href="/teacher_attendance.css">
 
 </head>
 
@@ -21,9 +22,9 @@
 
         <div class="main-content">
             <form method="POST" action="/mark-attendance">
-            <h1><input type="text" name="className" value="<%=className%>" readonly></h1>
+            <input type="text" name="className" class='className' value="<%=className%>" disabled>
             <div class="table-container">
-                <h2>Class - <%=className%></h2>
+                <h1>Class - <%=className%></h1>
                 
                    
                     <table>
@@ -71,7 +72,7 @@
                         </button>
                 </form>
             </div>
-        </div>
+    
 
 
 </body>

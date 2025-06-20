@@ -1,0 +1,395 @@
+/* ======================
+   VARIABLES & BASE STYLES
+   ====================== */
+:root {
+  --primary: #a378e9;
+  --primary-hover: #8a5ed5;
+  --text: #ffffff;
+  --text-light: #ffffff;
+  --bg: #f5f5f5;
+  --card-bg: #ffffff;
+  --border: #e0e0e0;
+  --success-bg: #d4edda;
+  --success-text: #155724;
+  --success-border: #c3e6cb;
+  --error: #ff0000;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --transition: all 0.2s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--bg);
+}
+h1{
+  color: black;
+}
+/* ==============
+   UTILITY CLASSES
+   ============== */
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.page-header h1{
+  text-align: center;
+}
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-1 {
+  gap: 0.5rem;
+}
+
+.gap-2 {
+  gap: 1rem;
+}
+
+.gap-3 {
+  gap: 1.5rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* ============
+   COMPONENTS
+   ============ */
+/* Alert */
+.alert {
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.alert-success {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
+}
+
+/* Default header style */
+
+
+/* Base header styles */
+
+
+
+
+/* Role badges */
+.role-badge {
+  padding: 5px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.role-badge.student {
+  background: #4CAF50;
+  color: white;
+}
+
+.role-badge.teacher {
+  background: #2196F3;
+  color: white;
+}
+
+.role-badge.admin {
+  background: #F44336;
+  color: white;
+}
+.post-header.student-header {
+    background-color:var(--primary);
+    border-left: 4px solid #2196f3; 
+}
+
+
+.post-header.teacher-header {
+    background-color: #fff8e1; 
+} 
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-icon:hover {
+  color: var(--primary);
+  transform: scale(1.1);
+}
+
+.btn-icon.liked {
+  color: var(--error);
+}
+
+/* Cards */
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Post Components */
+.post-header {
+  display: flex;
+  background-color: #d0c3e5;
+  padding: 5px 20px 5px 10px;
+  border: 1px solid black;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.user-avatar {
+  width: 48px;
+  height: 48px;
+  margin: auto 10px auto 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.user-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-meta {
+  flex: 1;
+}
+
+.username a {
+  font-weight: 550;
+  color: black;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.post {
+  width: 50%;
+  margin: auto;
+}
+.timeAgo{
+    color: black;
+}
+.username:hover {
+  color: var(--primary);
+}
+
+.post-time {
+  color: black;
+  font-size: 0.875rem;
+}
+
+.post-media {
+  width: 100%;
+  border-top: none;
+  border: 1px solid black;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: #f0f0f0;
+  margin-bottom: 50px;
+}
+
+.post-image {
+  width: 100%;
+  /* max-height: 500px; */
+  object-fit: contain;
+}
+
+.no-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-light);
+}
+
+.post-content {
+
+  padding: 5px 10px;
+  color: black;
+
+}
+
+.post-footer {
+  padding: 0.75rem 1rem;
+}
+
+.like-btn {
+  border: none;
+  background-color: transparent;
+}
+
+.post-actions {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.comment-section {
+  padding: 0 1rem 1rem;
+  display: none;
+}
+
+.comment-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.comment-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.comment-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(163, 120, 233, 0.2);
+}
+
+/* ============
+   LAYOUT
+   ============ */
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* ============
+   ANIMATIONS
+   ============ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============
+   RESPONSIVE
+   ============ */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .post-header {
+    padding: 0.75rem;
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .post-image {
+    max-height: 300px;
+  }
+
+  .post-content {
+    padding: 0.75rem;
+  }
+}
+
+/* Active states */
+.post.active .comment-section {
+  display: block;
+  animation: fadeIn 0.3s ease-out;
+}

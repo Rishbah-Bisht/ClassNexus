@@ -66,117 +66,87 @@
       <!-- Content divs -->
       <div id="posts-content" class="content-div active">
         <div class="profile-info">
-          <table>
-            <tr>
-              <td>Name</td>
-              <td class="colon-cell">:</td>
-              <td>
-                <%= user.name %>
-              </td>
-            </tr>
-            <tr>
-              <td>Registration ID</td>
-              <td class="colon-cell">:</td>
-              <td>
-                <%= user.Registration_Id %>
-              </td>
-            </tr>
-            <tr>
-              <td>Email-ID</td>
-              <td class="colon-cell">:</td>
-              <td>
-                <%= user.email %>
-              </td>
-            </tr>
-            <tr>
-              <td>Father Name</td>
-              <td class="colon-cell">:</td>
-              <td>
-                <%= user.fatherName %>
-              </td>
-            </tr>
-            <tr>
-              <td>D-O-B</td>
-              <td class="colon-cell">:</td>
-              <td>
-                <%= user.dob %>
-              </td>
-            </tr>
-            <% if(user.class ) {%>
-            <tr>
-              <td>Class</td>
-              <td class="colon-cell">:</td>
-              <td>
-                <%= user.class %>
-              </td>
-            </tr>
-            <%}%>
+  <table>
+  <tr>
+    <td>Name</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.name %></td>
+  </tr>
+  <tr>
+    <td>Registration ID</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.Registration_Id %></td>
+  </tr>
+  <tr>
+    <td>Email-ID</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.email %></td>
+  </tr>
+  <tr>
+    <td>Father Name</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.fatherName %></td>
+  </tr>
+  <tr>
+    <td>D-O-B</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.dob %></td>
+  </tr>
+  
+  <% if(user.class) { %>
+  <tr>
+    <td>Class</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.class %></td>
+  </tr>
+  <% } %>
 
-            <% if(user.ClassTeacher ) {%>
-            <tr>
-              <td>Class Teacher</td>
-              <td class="colon-cell">:</td>
-              <td>
-                <%= user.ClassTeacher %>
-              </td>
-            </tr>
-            <%}%>
+  <% if(user.ClassTeacher) { %>
+  <tr>
+    <td>Class Teacher</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.ClassTeacher %></td>
+  </tr>
+  <% } %>
 
+  <% if(user.qualification) { %>
+  <tr>
+    <td>Qualification</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.qualification %></td>
+  </tr>
+  <tr>
+    <td>Department</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.department %></td>
+  </tr>
+  <tr>
+    <td>Experience</td>
+    <td class="colon-cell">:</td>
+    <td><%= user.experience %></td>
+  </tr>
+  <% } %>
 
-            <% if(user.qualification ) {%>
-              <tr>
-                <td>Qualification</td>
-                <td class="colon-cell">:</td>
-                <td>
-                  <%= user.qualification %>
-                </td>
-              </tr>
+  <% if(user_info && user_info.bio) { %>
+  <tr>
+    <td>Username</td>
+    <td class="colon-cell">:</td>
+    <td><%= user_info.username %></td>
+  </tr>
+  <tr>
+    <td>Bio</td>
+    <td class="colon-cell">:</td>
+    <td><%= user_info.bio %></td>
+  </tr>
+  <% } %>
+</table>
 
-              <tr>
-                <td>Department</td>
-                <td class="colon-cell">:</td>
-                <td>
-                  <%= user.department %>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Experience</td>
-                <td class="colon-cell">:</td>
-                <td>
-                  <%= user.experience %>
-                </td>
-              </tr>
-              <%}%>
-                <tr>
-
-                </tr>
-
-                <% if(user_info && user_info.bio){%>
-                  <tr>
-                    <td>Username</td>
-                    <td class="colon-cell">:</td>
-                    <td>
-                      <%= user_info.username %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Bio</td>
-                    <td class="colon-cell">:</td>
-                    <td>
-                      <%= user_info.bio %>
-                    </td>
-                  </tr>
-                 
-                  <%}%>
-
-          </table>
         </div>
 
 
 
       </div>
-      <div id="tweets-content" class="content-div">Tweets content goes here</div>
+      <div id="tweets-content" class="content-div"></div>
       <!-- New content div will be added when new button is created -->
     </div>
   </div>

@@ -5,9 +5,24 @@ const classes = require('../models/classe');
 const ensureAuth = require('../middleware/auth'); // Changed to ensureAuth
 const User = require('../models/user_login_info');
 const UserMoreInfo = require('../models/user_more_info'); // Fixed name for consistency
+const Attandance_sumary = require("../models/Attandance_sumary");
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const sendCustomEmail = require('../utils/email');
+
+const timeAgo = (date) => {
+  const now = new Date();
+  const seconds = Math.floor((now - date) / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (seconds < 60) return `${seconds} sec ago`;
+  if (minutes < 60) return `${minutes} min ago`;
+  if (hours < 24) return `${hours} hrs ago`;
+  return `${days} days ago`;
+};
+
 
 router.post("/Admin/Save-User-info", async (req, res) => {
   try {
@@ -31,7 +46,7 @@ router.post("/Admin/Save-User-info", async (req, res) => {
         id: data.Student_ID,
         role: data.role
       });
-      return res.redirect('/Admin/Dashboard');
+      return res.redirect('/Admin/Dashboard/studentList');
     }
 
     if (data.role === 'teacher') {
@@ -59,7 +74,7 @@ router.post("/Admin/Save-User-info", async (req, res) => {
       });
       if (!req.session.userId) return res.redirect("/login");
 
-      return res.redirect('/Admin/Dashboard');
+      return res.redirect('/Admin/Dashboard/teacherlist');
     }
 
   } catch (error) {
@@ -75,12 +90,29 @@ router.get('/Admin/User/:Registration_Id', ensureAuth, async (req, res) => {
   if (!user) {
     return res.status(404).send("User not found");
   }
-  
+
   const user_info = await UserMoreInfo.findOne({ User_id: user._id });
-  
-  res.render('admin_User_Profile.ejs', { user,user_info });
-  
-  
+
+  res.render('admin_User_Profile.ejs', { user, user_info });
+
+
+});
+
+// Add this route to your server
+router.get('/api/get-user-role', async (req, res) => {
+    try {
+        const username = req.query.username;
+        const user = await User.findOne({ username: username }).select('role').lean();
+        
+        if (user) {
+            res.json({ role: user.role });
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
 });
 
 
@@ -118,6 +150,9 @@ router.get("/Admin/Add-teacher", ensureAuth, (req, res) => {
 
 // Admin Profile Edit
 router.get("/Admin/profile/profileEdit", ensureAuth, async (req, res) => {
+
+
+
   try {
     const userId = req.session.userId;
     const OwnerInfo = await User.findById(userId);
@@ -132,13 +167,15 @@ router.get("/Admin/profile/profileEdit", ensureAuth, async (req, res) => {
 // Admin Profile View
 router.get("/Admin/Profile", ensureAuth, async (req, res) => {
   try {
-    const userId = req.session.userId;
-    if (!userId) return res.redirect("/login");
+    const userId = req.userId;
+    const user = await User.findOne({ Registration_Id: req.registrationId });
 
-    const OwnerInfo = await User.findById(userId);
-    const Owner_Info2 = await UserMoreInfo.findOne({ User_id: userId });
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
 
-    res.render("admin_Profile.ejs", { OwnerInfo, Owner_Info2 });
+    const user_info = await UserMoreInfo.findOne({ User_id: user._id });
+    res.render("admin_Profile.ejs", { user, user_info, timeAgo });
   } catch (err) {
     console.error(err);
     res.status(500).send("Database error");
@@ -156,12 +193,121 @@ router.get('/Admin/Class/:className', ensureAuth, (req, res) => {
   res.render('admin_AllClass.ejs', { className });
 });
 
+
+
+
+
+router.get('/Admin/Class/subject/edit-subject/:subjectId', ensureAuth, async (req, res) => {
+  const { subjectId } = req.params;
+  const className = req.query.className;
+
+  try {
+    const classDoc = await classes.findOne({ name: className });
+
+    if (!classDoc) return res.status(404).send('Class not found');
+
+
+    res.render('admin_update_Subject', { className, classDoc, subjectId });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error loading subject details');
+  }
+});
+
+
+router.post('/Admin/Class/subject/edit-subject/:subjectId', ensureAuth, async (req, res) => {
+  const subjectId = req.params.subjectId;
+  const { className, SubjectName, SubjCode, teacher, teacher_ID } = req.body;
+
+  try {
+    // const result = await classes.updateOne(
+    //   {
+    //     name: className,
+    //     "subjects._id": new ObjectId(subjectId),
+    //   },
+    //   {
+    //     $set: {
+    //       "subjects.$.name": SubjectName,
+    //       "subjects.$.code": SubjCode,
+    //       "subjects.$.teacher": teacher,
+    //       "subjects.$.teacher_ID": teacher_ID,
+    //     },
+    //   }
+    // );
+    const result = await classes.findOne({
+      name: className
+    })
+    result.subjects.forEach(e => {
+      console.log(e.name)
+    });
+
+
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).send("Subject not found or no changes made.");
+    }
+
+    // res.redirect(`/Admin/Class/subject/${data.className}`);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to update subject.");
+  }
+});
+
+
+router.get('/Admin/Dashboard/studentList', ensureAuth, async (req, res) => {
+
+  try {
+    const students = await User.find({ role: "student" }).sort({ createdAt: -1 });
+    res.render('admin_dashboard_studentlist.ejs', {students});
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error fetching class data');
+  }
+});
+router.get('/Admin/Dashboard/teacherlist', ensureAuth, async (req, res) => {
+  const className = req.params.className;
+  try {
+    const teachrs = await User.find({ role: "teacher" }).sort({ createdAt: -1 });
+    res.render('admin_dashboard_teacherlist.ejs', { teachrs});
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error fetching class data');
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Get All Students in a Class
 router.get('/Admin/Class/AllStudent/:className', ensureAuth, async (req, res) => {
   const className = req.params.className;
   try {
     const AllStudent = await User.find({ class: className });
-    res.render('admin_Student_list.ejs', { className, AllStudent });
+     const Attandance_sumary2 = await Attandance_sumary.find({ className: className });
+    res.render('admin_Student_list.ejs', { className,Attandance_sumary2, AllStudent });
   } catch (err) {
     console.error(err);
     res.status(500).send('Error fetching class data');
@@ -182,7 +328,7 @@ router.get('/Admin/Class/ClassTeacher/:className', ensureAuth, async (req, res) 
     } else {
       res.render('admin_ask_Class_Teacher.ejs', { className });
     }
-    
+
   } catch (err) {
     console.error(err);
     res.status(500).send('Error fetching class data');

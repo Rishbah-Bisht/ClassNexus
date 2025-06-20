@@ -1,5 +1,4 @@
 <div class="main-content">
-    <h1>Posts</h1>
     <div class="upload-container">
         <h1>Upload Your Image</h1>
 
@@ -14,8 +13,10 @@
                 <input type="text" value="<%= registrationId %>" name="registrationId" readonly>
                 <input type="text" value="<%= className %>" name="className" readonly>
                 <input type="text" value="<%= userId %>" name="userId" readonly>
+                <input type="text" value="<%= user_role.role %>" name="role" >
                 <% userInfo.forEach((user)=> { %>
                     <input type="text" value="<%= user.username %>" name="username" readonly>
+                    
                     <% }); %>
             </div>
             <div class="preview-container" id="preview-container">

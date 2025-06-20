@@ -9,8 +9,11 @@
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/subjects.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/slide_bar.css">
+    <link rel="stylesheet" href="/dashbord.css">
+    <link rel="stylesheet" href="/admin.css">
+     <link rel="stylesheet" href="/form.css">
   <style>
     .main-content{
         max-width: 100%;
@@ -20,14 +23,16 @@
 
 <body>
 
-    <%- include('../partials/Admin_sidebar', { currentPage: 'Subject' }) %>
+    <%- include('../partials/Admin_sidebar', { currentPage: 'Class' }) %>
     <div class="main-content">
-      <h1>Class - <%=className%> </h1>
-      <div class="post-btn">
-          <a href="/Admin/Class/subject/Add-subject/<%=className%>">Add Subject</a>
-      </div>
+      
+      
      
       <div class="table-container">
+        <h1>Class - <%=className%> </h1>
+        <div class="post-btn">
+          <a href="/Admin/Class/subject/Add-subject/<%=className%>">Add Subject</a>
+      </div>
           <h2>Subject List</h2>
           <table>
               <thead>
@@ -48,6 +53,13 @@
                               <td><%= subject.teacher %></td>
                               <td><%= subject.teacher_ID %></td>
                               <td class="action-btns">
+                             
+                                <form action="/Admin/Class/subject/edit-subject/<%= subject._id %>" method="GET">
+                                    <input type="hidden" name="className" value="<%= className %>">
+                                    <button class="btn btn-edit" type="submit">Edit</button>
+                                  </form>
+
+
                                   <form action="/delete-subject/<%= subject._id %>" method="POST">
                                       <!-- Hidden field for the class name -->
                                       <input type="hidden" name="className" value="<%= className %>">

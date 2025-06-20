@@ -10,7 +10,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/admin.css">
+    <link rel="stylesheet" href="/slide_bar.css">
+    <link rel="stylesheet" href="/dashbord.css">
+    <link rel="stylesheet" href="/form.css">
 </head>
 
 <body>
@@ -50,25 +52,23 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="teacher-department">Department</label>
-                            <select id="teacher-department" name="department" required>
+                            <select id="teacher-department" name="department" required onchange="populateSubjects()">
                                 <option value="" disabled selected>Select a Department</option>
-                                <option value="science">Science</option>
-                                <option value="mathematics">Mathematics</option>
-                                <option value="english">English</option>
-                                <option value="social_science">Social Science</option>
-                                <option value="computer_science">Computer Science</option>
-                                <option value="arts">Arts</option>
-                                <option value="commerce">Commerce</option>
-                                <option value="medical">Medical</option>
+                                <option value="mathematics">Mathematics Department</option>
+                                <option value="science">Science Department</option>
+                                <option value="computer_science">Computer Science Department</option>
                                 <option value="languages">Languages Department</option>
-                                <option value="physical_education">Physical Education Department</option>
-                                <option value="music">Music Department</option>
+                                <option value="commerce">Commerce Department</option>
+                                <option value="humanities">Humanities Department</option>
                             </select>
+                            
+                            
                         </div>
-
+                        
                         <div class="form-group">
                             <label for="teacher-subject">Subject</label>
-                            <input type="text" id="teacher-subject" name="subject" required autocomplete="off">
+                            <input id="subject" name="subject" required>
+                        
                         </div>
                     </div>
 
@@ -116,12 +116,7 @@
                             <option value="teacher" selected>teacher</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="teacher-about">About</label>
-                        <textarea id="teacher-about" name="about" autocomplete="off"></textarea>
-                    </div>
-
-
+                    
                     <button type="submit" class="submit-btn">Add Teacher</button>
                     <div id="teacher-success" class="success-message">
                         Teacher added successfully!

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Social Media</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/slide_bar.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/adminDashborde.css">
+</head>
+
+<body>
+    <%- include('../partials/Admin_sidebar', { currentPage: 'dashboard' }) %>
+        <div class="main-content">
+<div class="panel" id="teacher-panel">
+                <h2>Teachers</h2>
+                <input type="text" id="search-bar" class="search-bar" placeholder="Search for Teachers..."
+                    onkeyup="filterTeachers()">
+                <div id="teacher-list">
+                    <% for(let teachr of teachrs){ %>
+                        <a href="/Admin/User/<%=teachr.Registration_Id%>" class="teacher-container">
+                            <div class="teacher-info">
+                                <div class="teacher-details">
+                                    <span class="teacher-name">
+                                        <%= teachr.name %>
+                                    </span>
+                                    <span class="teacher-id">Teacher ID - <%= teachr.Registration_Id %></span>
+                                </div>
+                            </div>
+                            <div class="time-ago">
+                                Deapartment - <%= teachr.department %>
+                            </div>
+                        </a>
+                        <% } %>
+                </div>
+
+            </div>
+
+        </div>
+
+
+</body>
+<script>
+function filterTeachers() {
+    // Get search input value and convert to lowercase
+    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+    const teacherContainers = document.querySelectorAll('.teacher-container');
+    
+    teacherContainers.forEach(container => {
+        // Get teacher name and ID from the container
+        const name = container.querySelector('.teacher-name').textContent.toLowerCase();
+        const teacherId = container.querySelector('.teacher-id').textContent.toLowerCase();
+        const department = container.querySelector('.time-ago').textContent.toLowerCase();
+        
+        // Check if search term matches name, ID, or department
+        if (name.includes(searchTerm) || 
+            teacherId.includes(searchTerm) || 
+            department.includes(searchTerm)) {
+            container.style.display = 'flex'; // or whatever your display style should be
+        } else {
+            container.style.display = 'none';
+        }
+    });
+}
+</script>
+
+</html>

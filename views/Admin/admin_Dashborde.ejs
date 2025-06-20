@@ -6,66 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Social Media</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-      crossorigin="anonymous" referrerpolicy="no-referrer" />
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/slide_bar.css">
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/adminDashborde.css">
-
 </head>
 
 <body>
     <%- include('../partials/Admin_sidebar', { currentPage: 'dashboard' }) %>
+        <div class="main-content">
 
-
-
-    <div class="main-content">
-        <div class="panel" id="student-panel">
-            
-            <h2>Students</h2>
-            <input type="text" id="search-bar" class="search-bar" placeholder="Search for students..." onkeyup="filterStudents()">
-            <% for(let student of students){ %>
-                <a href="/Admin/User/<%=student.Registration_Id%>" class="student-container">
-                    <div class="student-info">
-                        <div class="student-details">
-                            <span class="student-name"><%= student.name %></span>
-                            <span class="student-id">Student ID - <%= student.Registration_Id %></span>
-                        </div>
-                    </div>
-                    <div class="time-ago">
-                        Class - <%= student.class %> 
-                    </div>
+            <div class="role-container">
+                <a href="/Admin/Dashboard/studentList" class="role-card">
+                    <i class="fas fa-user-graduate role-icon student-icon"></i>
+                    <div class="role-title">Student</div>
+                    <div class="role-desc">Total Students</div>
                 </a>
-            <% } %>
-        </div>
-        
-        
 
-        <div class="panel" id="teacher-panel">
-            <h2>Teachers</h2>
-            <input type="text" id="search-bar" class="search-bar" placeholder="Search for Teachers..." onkeyup="filterStudents()">
-            <div id="teacher-list">
-                <% for(let teachr of teachrs){ %>
-                    <a href="/Admin/User/<%=teachr.Registration_Id%>" class="teacher-container">
-                        <div class="teacher-info">
-                            <div class="teacher-details">
-                                <span class="teacher-name"><%= teachr.name %></span>
-                                <span class="teacher-id">Teacher ID - <%= teachr.Registration_Id %></span>
-                            </div>
-                        </div>
-                        <div class="time-ago">
-                            Deapartment - <%= teachr.department %> 
-                        </div>
-                    </a>
-                <% } %>
+                <a href="/Admin/Dashboard/teacherlist" class="role-card">
+                    <i class="fas fa-chalkboard-teacher role-icon teacher-icon"></i>
+                    <div class="role-title">Teacher</div>
+                    <div class="role-desc">Total Teachers</div>
+                </a>
             </div>
 
+
         </div>
-    </div>
 
-    <script>
+        <script>
 
-    </script>
+        </script>
 
 
 </body>
